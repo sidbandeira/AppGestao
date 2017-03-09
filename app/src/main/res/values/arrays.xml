@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="logos">
+        <item>@drawable/tqcheio</item>
+        <item>@drawable/tqnormal</item>
+        <item>@drawable/tqmedio</item>
+        <item>@drawable/tqvazio</item>
+    </array>
+
+</resources>

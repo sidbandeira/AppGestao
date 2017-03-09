@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgTanque"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/txtTanque"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imgTanque"
+        android:layout_marginLeft="4dp"
+        android:text="@null"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <LinearLayout
+        android:id="@+id/linearCapacidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignLeft="@+id/txtTanque"
+        android:layout_below="@+id/txtTanque"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="capacidade"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/txtCapacidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:textSize="15dp"
+            android:layout_weight="9"
+            android:text="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearEstoque"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearCapacidade"
+        android:layout_alignLeft="@+id/txtTanque"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="estoque"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtEstoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtCapacidade"
+            android:layout_below="@+id/txtCapacidade"
+            android:layout_marginLeft="4dp"
+            android:textSize="15dp"
+            android:text="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearDetalhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearEstoque"
+        android:layout_alignLeft="@+id/txtTanque"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Última Compra: "
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtUltimaCompra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtEstoque"
+            android:layout_below="@+id/txtEstoque"
+            android:layout_marginLeft="4dp"
+            android:textSize="15dp"
+            android:text="01/09/2016"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtAtualizacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Atualizado em 19/09/2016 - 16hs"
+        android:textSize="20dp"
+        android:layout_below="@id/linearDetalhe"/>
+
+</RelativeLayout>
