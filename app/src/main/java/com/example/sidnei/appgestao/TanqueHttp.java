@@ -9,15 +9,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TanqueHttp {
-    public static final String TANQUES_URL_JSON = "http://localhost:81/ws/suporte.json";
+    public static final String urlArquivo = "http://sgestao.hol.es/suporte.json";
+    //public static final String TANQUES_URL_JSON = "http://10.0.2.2:81/webservice/suporte.json";
 
-    private static HttpURLConnection connectar(String urlArquivo) throws IOException {
+    public static HttpURLConnection connectar() throws IOException {
         final int SEGUNDOS = 1000;
         URL url = new URL(urlArquivo);
         HttpURLConnection conexao = (HttpURLConnection)url.openConnection();
         conexao.setReadTimeout(10 * SEGUNDOS);
         conexao.setConnectTimeout(15 * SEGUNDOS);
-        conexao.setRequestMethod("POST");
+        conexao.setRequestMethod("GET");
         conexao.setDoInput(true);
         conexao.setDoOutput(false);
         conexao.connect();
