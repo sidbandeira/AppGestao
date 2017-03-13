@@ -41,8 +41,7 @@ public class TanquesListFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_tanques_list, null);
         mTextMensagem = (TextView)layout.findViewById(android.R.id.empty);
         mProgressBar = (ProgressBar)layout.findViewById(R.id.progressBar);
@@ -113,7 +112,7 @@ public class TanquesListFragment extends Fragment{
 
         public  List<Tanque> carregarTanquesJson() {
             try {
-                HttpURLConnection conexao = connectar(TANQUES_URL_JSON);
+                HttpURLConnection conexao = TanqueHttp.connectar();
                 int resposta = conexao.getResponseCode();
                 if (resposta ==  HttpURLConnection.HTTP_OK) {
                     InputStream is = conexao.getInputStream();
@@ -142,28 +141,6 @@ public class TanquesListFragment extends Fragment{
                 listaDeTanques.add(tanque);
             }
             return listaDeTanques;
-        }
-
-        public static final String TANQUES_URL_JSON = "http://10.0.2.2:81/ws/suporte.json";
-
-        private  HttpURLConnection connectar(String urlArquivo) throws IOException {
-            final int SEGUNDOS = 1000;
-            URL url = new URL(urlArquivo);
-            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-            conexao.setReadTimeout(10 * SEGUNDOS);
-            conexao.setConnectTimeout(15 * SEGUNDOS);
-            conexao.setRequestMethod("GET");
-            conexao.setDoInput(true);
-            conexao.setDoOutput(false);
-            conexao.connect();
-            return conexao;
-        }
-
-        public  boolean temConexao(Context ctx) {
-            ConnectivityManager cm = (ConnectivityManager)
-                    ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo info = cm.getActiveNetworkInfo();
-            return (info != null && info.isConnected());
         }
 
         private  String bytesParaString(InputStream is) throws IOException {
