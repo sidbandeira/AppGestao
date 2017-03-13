@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tela_2Activity" />
         <activity android:name=".VendasActivity" />
         <activity android:name=".PostosActivity" />
         <activity android:name=".FechamentoCaixaActivity" />
