@@ -1,6 +1,8 @@
 package com.example.sidnei.appgestao;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,23 +53,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(edtUsuario.getText().toString().equals("")){
-            Toast.makeText(this,"Informe seu e-mail!", Toast.LENGTH_SHORT).show();
-            edtUsuario.requestFocus();
-        }else{
-            if (edtSenha.getText().toString().equals("")){
-                Toast.makeText(this,"Informe a senha!",Toast.LENGTH_SHORT).show();
-                edtSenha.requestFocus();
-            }else{
-                String email = edtUsuario.getText().toString();
-                String senha = edtSenha.getText().toString();
+        if (isOnline()) {
+            if (edtUsuario.getText().toString().equals("")) {
+                Toast.makeText(this, "Informe seu e-mail!", Toast.LENGTH_SHORT).show();
+                edtUsuario.requestFocus();
+            } else {
+                if (edtSenha.getText().toString().equals("")) {
+                    Toast.makeText(this, "Informe a senha!", Toast.LENGTH_SHORT).show();
+                    edtSenha.requestFocus();
+                } else {
+                    String email = edtUsuario.getText().toString();
+                    String senha = edtSenha.getText().toString();
 
-                enviaDados task = new enviaDados();
+                    enviaDados task = new enviaDados();
 
-                //task.execute("http://sgestao.hol.es/ws/LoginWs.php?email="+email+"&senha="+senha, email, senha);
-                task.execute("http://10.0.2.2:81/ws_sgestao/ws/LoginWs.php?email="+email+"&senha="+senha, email, senha);
+                    task.execute("http://sgestao.hol.es/ws/LoginWs.php?email=" + email + "&senha=" + senha, email, senha);
+                    //task.execute("http://10.0.2.2:81/ws_sgestao/ws/LoginWs.php?email="+email+"&senha="+senha, email, senha);
+                }
             }
+        }else{
+            Toast.makeText(this,"Não foi possível conectar a internet! Verifique sua conexão!",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return manager.getActiveNetworkInfo() != null &&
+                manager.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
     private class enviaDados extends AsyncTask<String, Void, JSONObject> {
