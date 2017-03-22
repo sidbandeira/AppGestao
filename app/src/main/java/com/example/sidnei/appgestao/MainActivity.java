@@ -76,6 +76,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 20){
+            codEmpresa = 0;
+            menuLoja = 0;
+            menuPosto = 0;
+        }
+    }
+
     public boolean isOnline() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -143,16 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 if (codEmpresa > 0){
-//                    UnidadeNegocioListFragment f = new UnidadeNegocioListFragment();
-//                    // Supply index input as an argument.
-//                    Bundle args = new Bundle();
-//                    args.putInt("codEmpresa", codEmpresa);
-//                    args.putInt("menuLoja", menuLoja);
-//                    args.putInt("menuPosto", menuPosto);
-//                    f.setArguments(args);
-
                     Intent it2 = new Intent(MainActivity.this, SelecaoUnidadeActivity.class);
-                    startActivity(it2);
+                    //startActivity(it2);
+                    startActivityForResult(it2,20);
 
                 }else {
                     //String mensa = jsonObject.getString("wsMsg");
