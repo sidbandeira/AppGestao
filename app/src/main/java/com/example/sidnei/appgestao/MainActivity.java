@@ -2,14 +2,15 @@ package com.example.sidnei.appgestao;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,11 +23,13 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
     private EditText edtUsuario;
     private EditText edtSenha;
     private Button btnLogar;
     private CheckBox chkLembrar;
+    public static Integer codEmpresa = 0;
+    public static Integer menuPosto = 0;
+    public static Integer menuLoja = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 enviaDados task = new enviaDados();
 
-                task.execute("http://sgestao.hol.es/LoginWs.php?email=sidnei@gmail.com&senha=123456", email, senha);
-
+                //task.execute("http://sgestao.hol.es/ws/LoginWs.php?email="+email+"&senha="+senha, email, senha);
+                task.execute("http://10.0.2.2:81/ws_sgestao/ws/LoginWs.php?email="+email+"&senha="+senha, email, senha);
             }
         }
     }
@@ -83,8 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // define o método de envio dos dados
                 conn.setRequestMethod("POST");
                 // define os dados a serem enviados
-                String dados =
-                        "?email="+email+"&senha="+senha;
+                String dados = "email="+email+"&senha="+senha;
                 conn.setDoOutput(true);
                 // envia os dados
                 try (DataOutputStream out = new DataOutputStream(conn.getOutputStream())) {
@@ -112,17 +114,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
+
             try {
-                int cod = jsonObject.getInt("wsCodempresa");
-                if (cod > 0){
-                    Toast.makeText(MainActivity.this,"Logou",Toast.LENGTH_LONG).show();
-                    Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                    //it.putExtra("cod", cod);
-                    startActivity(it);
+                JSONArray jsonMenus = jsonObject.getJSONArray("menu");
+                for (int i = 0; i < jsonMenus.length(); i++) {
+                    JSONObject jsonUn = jsonMenus.getJSONObject(i);
+
+                    codEmpresa = jsonUn.getInt("codempresa");
+                    String tipoMenu= jsonUn.getString("menu");
+
+                    if (tipoMenu.equals("Posto")){
+                        menuPosto = jsonUn.getInt("liberado");
+                    }else if(tipoMenu.equals("Loja")){
+                        menuLoja= jsonUn.getInt("liberado");
+                    }
+                }
+                if (codEmpresa > 0){
+//                    UnidadeNegocioListFragment f = new UnidadeNegocioListFragment();
+//                    // Supply index input as an argument.
+//                    Bundle args = new Bundle();
+//                    args.putInt("codEmpresa", codEmpresa);
+//                    args.putInt("menuLoja", menuLoja);
+//                    args.putInt("menuPosto", menuPosto);
+//                    f.setArguments(args);
+
+                    Intent it2 = new Intent(MainActivity.this, SelecaoUnidadeActivity.class);
+                    startActivity(it2);
+
                 }else {
-                    String mensa = jsonObject.getString("wsMsg");
-                    Toast.makeText(MainActivity.this, "Mensagem: " + mensa,
-                            Toast.LENGTH_LONG).show();
+                    //String mensa = jsonObject.getString("wsMsg");
+                    Toast.makeText(MainActivity.this, "Usuário não localizado",Toast.LENGTH_LONG).show();
                     edtUsuario.requestFocus();
                 }
             } catch (JSONException e) {
@@ -130,5 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
 }
 
