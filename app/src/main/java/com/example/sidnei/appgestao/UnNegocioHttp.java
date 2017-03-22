@@ -19,7 +19,7 @@ import java.util.List;
 
 public class UnNegocioHttp {
     //public static final String UNNEGOCIO_URL_JSON = "http://10.0.2.2:81/ws_sgestao/Json/UnidadeNegocioWS.json";
-    public static final String UNNEGOCIO_URL_JSON = "http://sgestao.hol.es/ws/UnNegocioWs.php?codempresa=4";
+    public static final String UNNEGOCIO_URL_JSON = "http://sgestao.hol.es/ws/UnNegocioWs.php?codempresa=" + MainActivity.codEmpresa;
 
     private static HttpURLConnection connectar(String urlArquivo) throws IOException {
         final int SEGUNDOS = 1000;
