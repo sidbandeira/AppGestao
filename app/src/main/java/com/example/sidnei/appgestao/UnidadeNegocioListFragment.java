@@ -87,7 +87,8 @@ public class UnidadeNegocioListFragment extends Fragment implements AdapterView.
         }
         @Override
         protected List<UnidadeNegocio> doInBackground(Void... strings) {
-            return UnNegocioHttp.carregarUnidadeNegocioJson();
+
+            return UnNegocioHttp.carregarUnidadeNegocioJson(MainActivity.codEmpresa);
         }
         @Override
         protected void onPostExecute(List<UnidadeNegocio> unidadeNegocios) {

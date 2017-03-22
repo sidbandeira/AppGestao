@@ -17,9 +17,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnNegocioHttp {
+public class  UnNegocioHttp{
     //public static final String UNNEGOCIO_URL_JSON = "http://10.0.2.2:81/ws_sgestao/Json/UnidadeNegocioWS.json";
-    public static final String UNNEGOCIO_URL_JSON = "http://sgestao.hol.es/ws/UnNegocioWs.php?codempresa=" + MainActivity.codEmpresa;
+    public static final String UNNEGOCIO_URL_JSON = "http://sgestao.hol.es/ws/UnNegocioWs.php?codempresa=";
 
     private static HttpURLConnection connectar(String urlArquivo) throws IOException {
         final int SEGUNDOS = 1000;
@@ -41,9 +41,12 @@ public class UnNegocioHttp {
         return (info != null && info.isConnected());
     }
 
-    public static List<UnidadeNegocio> carregarUnidadeNegocioJson() {
+    //FUNCAO VAI RECEBER UMA VARIAVEL INTEIRA COM O CODIGO DA EMPRESA PARA RECARREGAR AS UNIDADES
+    // DE NEGOCIO SEMPRE QUE O USUARIO EFETUAR O LOGIN
+    public static List<UnidadeNegocio> carregarUnidadeNegocioJson(Integer empresa) {
         try {
-            HttpURLConnection conexao = connectar(UNNEGOCIO_URL_JSON);
+
+            HttpURLConnection conexao = connectar(UNNEGOCIO_URL_JSON + empresa);
             int resposta = conexao.getResponseCode();
             if (resposta == HttpURLConnection.HTTP_OK) {
                 InputStream is = conexao.getInputStream();
