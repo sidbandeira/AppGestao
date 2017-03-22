@@ -12,6 +12,7 @@
     android:background="#ebb03f">
 
     <Button
+        android:id="@+id/btnVendas"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_weight="1"
@@ -23,6 +24,7 @@
         android:onClick="Vendas"/>
 
     <Button
+        android:id="@+id/btnCaixa"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_weight="1"
@@ -34,6 +36,7 @@
         android:onClick="Caixa"/>
 
     <Button
+        android:id="@+id/btnProdutos"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_weight="1"
@@ -45,6 +48,7 @@
         android:onClick="Produtos"/>
 
     <Button
+        android:id="@+id/btnPostos"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_weight="1"
