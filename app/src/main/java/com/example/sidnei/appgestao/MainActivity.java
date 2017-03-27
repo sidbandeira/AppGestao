@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText edtUsuario;
     private EditText edtSenha;
     private Button btnLogar;
-    private CheckBox chkLembrar;
     public static Integer codEmpresa = 0;
     public static Integer menuPosto = 0;
     public static Integer menuLoja = 0;
@@ -42,9 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edtSenha = (EditText) findViewById(R.id.edtSenha);
 
         btnLogar = (Button) findViewById(R.id.btnLogar);
-        chkLembrar = (CheckBox) findViewById(R.id.chkLembrar);
 
-        chkLembrar.setChecked(true);
         edtUsuario.setText("sidnei@gmail.com");
         edtSenha.setText("123456");
 
