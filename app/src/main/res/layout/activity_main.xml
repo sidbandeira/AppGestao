@@ -8,21 +8,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sidnei.appgestao.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fundo_base_10p_1"
+    android:baselineAligned="false">
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/logo"/>
+        android:background="@drawable/logotipo"/>
     <TextView
         android:id="@+id/txtUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:textSize="20dp"
-        android:text="Usuario" />
+        android:text="Usuario"
+        android:textColor="#ffa602" />
 
     <EditText
         android:id="@+id/edtUsuario"
@@ -36,7 +39,8 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="Senha"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:textColor="#ffa602" />
 
     <EditText
         android:id="@+id/edtSenha"
@@ -47,17 +51,13 @@
 
     <Button
         android:id="@+id/btnLogar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="142dp"
+        android:layout_height="41dp"
         android:textSize="20dp"
         android:text="Logar"
-        android:onClick="logar"/>
+        android:onClick="logar"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_login"
+        android:textColor="#ffffff" />
 
-    <CheckBox
-        android:id="@+id/chkLembrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Lembrar"
-        android:layout_gravity="right" />
 </LinearLayout>
