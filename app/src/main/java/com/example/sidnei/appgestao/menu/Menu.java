@@ -1,7 +1,16 @@
 package com.example.sidnei.appgestao.menu;
 
-/**
- * Created by Sidnei on 03/04/2017.
- */
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable {
+    public String descricao;
+
+    public Menu(){
+
+    }
+
+    public Menu(String descricao){
+        this.descricao = descricao;
+    }
+
 }
