@@ -9,30 +9,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sidnei.appgestao.pedidoCompra.PedidoCompraActivity"
     android:orientation="vertical"
-    android:background="@drawable/fundo_padrao">
+    android:background="@drawable/fundo_padrao"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dados do Fornecedor"
+        android:text="Dados do Pedido"
         android:id="@+id/txtTitulo"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="normal|bold"
-        android:textColor="@android:color/holo_orange_light" />
+        android:textColor="#ffa602"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fornecedor:"
         android:id="@+id/txtFornecedor"
-        android:layout_below = "@+id/txtTitulo"/>
+        android:layout_below = "@+id/txtTitulo"
+        android:textColor="#ffa602"
+        android:textSize="20sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtFornecedor"
-        android:layout_below = "@+id/txtFornecedor"/>
+        android:layout_below = "@+id/txtFornecedor"
+        android:textSize="20sp"/>
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -46,46 +51,55 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data Pedido:"
-            android:layout_weight="0.67"/>
+            android:layout_weight="0.67"
+            android:textColor="#ffa602"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/txtPagamento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pagamento:"
-            android:layout_weight="2.83"/>
+            android:layout_weight="2.83"
+            android:textColor="#ffa602"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <EditText
             android:layout_width="114dp"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
-            android:id="@+id/edtData" />
+            android:id="@+id/edtData"
+            android:textSize="20sp"
+            android:layout_weight="0.40" />
 
         <EditText
             android:id="@+id/edtPagamento"
-            android:layout_width="279dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_below = "@+id/edtPagamento"
-            android:layout_weight="2"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btnProdutos"
-        android:layout_marginTop="15dp"
-        android:layout_width="135dp"
+        android:layout_marginTop="25dp"
+        android:layout_width="219dp"
         android:layout_height="36dp"
-        android:text="Produtos"
+        android:text="Adicionar Produtos"
         android:onClick="IncluirClick"
-        android:background="@drawable/btn_login"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"
+        android:background="#ffa602"
+        style="@style/Base.DialogWindowTitle.AppCompat" />
 
 </LinearLayout>
