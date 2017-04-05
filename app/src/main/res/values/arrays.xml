@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="imgmenus">
-        <item>@drawable/caixa_58</item>
-        <item>@drawable/bomba_58</item>
-        <item>@drawable/grafico_58</item>
-        <item>@drawable/produto_58</item>
+        <item>@drawable/menu_caixa_58</item>
+        <item>@drawable/menu_bomba_58</item>
+        <item>@drawable/menu_grafico_58</item>
+        <item>@drawable/menu_produto_58</item>
+        <item>@drawable/menu_ped_compra_58</item>
     </array>
 
     <array name="logos">
