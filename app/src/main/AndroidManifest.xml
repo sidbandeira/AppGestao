@@ -28,8 +28,8 @@
         <activity android:name=".FechamentoCaixaActivity" />
         <activity android:name=".ProdutosActivity" />
         <activity android:name=".menu.MenuActivity" />
-        <activity android:name=".SelecaoUnidadeActivity" />
-        <activity android:name=".pedidocompra.PedidoCompraActivity" />
+        <activity android:name=".unidadeNegocio.SelecaoUnidadeActivity" />
+        <activity android:name=".pedidoCompra.PedidoCompraActivity" />
         <activity android:name=".classeProduto.PedidoItemActivity"></activity>
     </application>
 

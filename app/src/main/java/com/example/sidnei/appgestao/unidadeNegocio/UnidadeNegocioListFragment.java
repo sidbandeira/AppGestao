@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao;
+package com.example.sidnei.appgestao.unidadeNegocio;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.sidnei.appgestao.MainActivity;
+import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.menu.MenuActivity;
 
 import java.util.ArrayList;

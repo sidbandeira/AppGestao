@@ -1,9 +1,11 @@
-package com.example.sidnei.appgestao;
+package com.example.sidnei.appgestao.unidadeNegocio;
 
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocio;
 
 import org.json.JSONArray;
 import org.json.JSONException;
