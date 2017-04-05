@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao;
+package com.example.sidnei.appgestao.tanque;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.sidnei.appgestao.R;
 
 import java.util.List;
 
