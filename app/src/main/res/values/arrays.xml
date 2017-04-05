@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="imgmenus">
+        <item>@drawable/caixa_58</item>
+        <item>@drawable/bomba_58</item>
+        <item>@drawable/grafico_58</item>
+        <item>@drawable/produto_58</item>
+    </array>
+
     <array name="logos">
         <item>@drawable/tqcheio</item>
         <item>@drawable/tqnormal</item>
