@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sidnei.appgestao.menu.MenuListFragment">
+    tools:context="com.example.sidnei.appgestao.menu.MenuListFragment"
+    android:background="#f40606">
 
 
 </FrameLayout>

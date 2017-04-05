@@ -6,25 +6,34 @@
     android:padding="6dp">
 
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Un: "
-        />
+        android:textSize="20dp"
+        android:textColor="#ffa602"
+        android:textStyle="bold" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@null"
         android:id="@+id/txtId"
-        />
+        android:textSize="20dp"
+        android:textColor="#ffa602"
+        android:textStyle="bold" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@null"
         android:id="@+id/txtRazaoSocial"
-        />
+        android:textSize="20dp"
+        android:textColor="#ffa602"
+        android:textStyle="bold" />
 
 </LinearLayout>

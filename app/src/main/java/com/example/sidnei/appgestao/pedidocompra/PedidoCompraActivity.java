@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidocompra;
+package com.example.sidnei.appgestao.pedidoCompra;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

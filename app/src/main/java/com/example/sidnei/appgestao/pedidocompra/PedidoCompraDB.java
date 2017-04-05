@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidocompra;
+package com.example.sidnei.appgestao.pedidoCompra;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidocompra;
+package com.example.sidnei.appgestao.pedidoCompra;
 
 public class PedidoCompraItem {
     public long _id;
