@@ -13,6 +13,7 @@ import com.example.sidnei.appgestao.PostosActivity;
 import com.example.sidnei.appgestao.ProdutosActivity;
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.classeProduto.PedidoItemActivity;
+import com.example.sidnei.appgestao.pedidoCompra.PedidoCompraActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MenuActivity extends AppCompatActivity implements AdapterView.OnIte
 
         menus = new ArrayList<Menu>();
         String descricao = "";
-        for(int l = 0; l < 4; l++){
+        for(int l = 0; l < 5; l++){
             switch (l) {
                 case 0:
                     if(MainActivity.menuPosto ==  1) {
@@ -52,6 +53,11 @@ public class MenuActivity extends AppCompatActivity implements AdapterView.OnIte
                 case 3:
                     if(MainActivity.menuLoja ==  1) {
                         descricao = "3-Produtos";
+                    }
+                    break;
+                case 4:
+                    if(MainActivity.menuLoja ==  1) {
+                        descricao = "4-Compras";
                     }
                     break;
                 default:
@@ -91,6 +97,10 @@ public class MenuActivity extends AppCompatActivity implements AdapterView.OnIte
             case "Produtos":
                     Intent it3 = new Intent(this, ProdutosActivity.class);
                     startActivity(it3);
+                break;
+            case "Compras":
+                Intent it4 = new Intent(this, PedidoCompraActivity.class);
+                startActivity(it4);
                 break;
             default:
                 //Descricao = "";
