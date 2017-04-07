@@ -7,6 +7,109 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sidnei.appgestao.pedidoCompra.PedidoCompraItemActivity">
+    tools:context="com.example.sidnei.appgestao.pedidoCompra.PedidoCompraItemActivity"
+    android:background="@drawable/fundo_padrao">
+
+    <Spinner
+        android:id="@+id/spnProduto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/lnCabProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spnProduto2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtPrecoCusto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="Custo"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtQtde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="    Qtde"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="     Total"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnVlrProd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lnCabProduto"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edtCusto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(x)"/>
+
+        <EditText
+            android:id="@+id/edtQtde"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(=)"/>
+        <EditText
+            android:id="@+id/edtTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnBotao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/lnVlrProd">
+
+        <Button
+            android:id="@+id/btnProdutos"
+            android:layout_marginTop="25dp"
+            android:layout_width="219dp"
+            android:layout_height="36dp"
+            android:text="Adicionar"
+            android:onClick="IncluirClick"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.07"
+            android:background="#ffa602"
+            style="@style/Base.DialogWindowTitle.AppCompat" />
+    </LinearLayout>
+
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridView"
+        android:layout_below="@+id/lnBotao"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
