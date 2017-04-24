@@ -4,10 +4,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.sidnei.appgestao.R;
@@ -26,20 +30,59 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     ArrayList<String> itemlist;
     ArrayList<Produto> item;
 
+    ArrayList<String> itemlistpedido;
+    ArrayList<PedidoCompraItem> itempedido;
+
+    ArrayList<String> listaprodutos = new ArrayList<String>();
+
     //VARIAVEIS PARA CALCULAR OS VALORES DO PRODUTO SELECIONADO
     Double custo = 0.00;
     Double qtde = 0.00;
     Double total = 0.00;
+    String descricaoProduto = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
 
+        Button btAdicionar = (Button) findViewById(R.id.btAdicionar);
+        ListView listagem = (ListView) findViewById(R.id.listProdutos);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaprodutos);
+        listagem.setAdapter(adapter);
+
         // Download JSON file AsyncTask
         new DownloadJSON().execute();
+
+        btAdicionar.setOnClickListener(new View.OnClickListener() {
+                                           public void onClick(View view) {
+
+                                               listaprodutos.add(descricaoProduto + "|" + custo.toString() + "|" + qtde.toString() + "|" + total.toString());
+                                               adapter.notifyDataSetChanged();
+
+
+                                               // recuperando o texto digitado pelo usuario
+//                                               EditText txtSerie = (EditText) findViewById(R.id.txtSerie);
+//                                               String serie = txtSerie.getText().toString();
+//                                               // caso o texto for preenchido, adiciona na lista e atualiza o adapter
+//                                               // caso contrario exibe uma mensagem solicitando ao usuário que digite uma série
+//                                               if (serie.length() > 0) {
+//                                                   txtSerie.setText("");
+//                                                   txtSerie.findFocus();
+//                                                   series.add(serie);
+//                                                   adapter.notifyDataSetChanged();
+//                                               } else {
+//                                                   Toast.makeText(MainActivity.this, "Digite o nome da série", Toast.LENGTH_SHORT).show();
+//                                               }
+                                           }
+                                       }
+        );
     }
 
+    protected void onCreateView(LayoutInflater inflater, ViewGroup container,
+                                Bundle savedInstanceState){
+        View ListView = inflater.inflate(R.layout.item_listagem_pedido, null);
+    }
 
     // Download JSON file AsyncTask
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
@@ -56,6 +99,18 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             jsonobject = JSON.getJSONfromURL("http://10.0.2.2:81/ws_sgestao/Json/ProdutoWS.json");
 
             try {
+                // ADICIONA UM ITEM NA LISTA DE PRODUTOS PARA SERVIR DE HINT DO SPINNER
+                Produto prod0 = new Produto();
+
+                prod0.set_id(0);
+                prod0.setProdutoDescricao("Selecione um Produto...");
+                prod0.setProdutoPrecovenda(0.00);
+                prod0.setProdutoPrecoCusto(0.00);
+                item.add(prod0);
+
+                // PREENCHE O SPINNER COM O ITEM DO HINT
+                itemlist.add("Selecione um produto ...");
+
                 // PEGA O NÓ DOS PRODUTOS
                 jsonarray = jsonobject.getJSONArray("produtos");
                 for (int i = 0; i < jsonarray.length(); i++) {
@@ -82,8 +137,8 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void args) {
+            //adicionar();
             // SETA O SPINNER DA TELA DE PEDIDOITEM
-
             Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
 
             // SPINNER ADAPTER
@@ -98,6 +153,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
                     final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
                     EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
+                    descricaoProduto = itemlist.get(position).toString();
 
                     //ALIMENTA AS VARIAVEIS PARA CALCULAR O TOTAL DO PRODUTO
                     custo = Double.parseDouble(item.get(position).get_produtoPrecoCusto().toString());
