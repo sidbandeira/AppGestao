@@ -1,5 +1,6 @@
 package com.example.sidnei.appgestao.pedidoCompra;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.example.sidnei.appgestao.utilitario.JSON;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PedidoCompraItemActivity extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
     ArrayList<String> itemlistpedido;
     ArrayList<PedidoCompraItem> itempedido;
+    private ArrayList<PedidoCompraItem> itens = new ArrayList<PedidoCompraItem>();
 
     ArrayList<String> listaprodutos = new ArrayList<String>();
 
@@ -41,42 +44,45 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     Double total = 0.00;
     String descricaoProduto = "";
 
+    private AdapterItemCompra adapter;
+    // FORMATA O VALOR DOUBLE COM TRES DECIMAIS
+    DecimalFormat formato = new DecimalFormat("#.###");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
 
+        // recuperando a listview declarada em main.xml para poder definir o adapter
+        ListView listagem = (ListView) findViewById(R.id.lstProdutos);
+
+        // recupera o button adicionar declarado  no xml
         Button btAdicionar = (Button) findViewById(R.id.btAdicionar);
-        ListView listagem = (ListView) findViewById(R.id.listProdutos);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaprodutos);
+
+        //Cria o adapter
+        adapter = new AdapterItemCompra(this, itens);
+
+        //Define o Adapter
         listagem.setAdapter(adapter);
+        listagem.setCacheColorHint(Color.TRANSPARENT);
 
         // Download JSON file AsyncTask
         new DownloadJSON().execute();
 
         btAdicionar.setOnClickListener(new View.OnClickListener() {
-                                           public void onClick(View view) {
+            public void onClick(View view) {
 
-                                               listaprodutos.add(descricaoProduto + "|" + custo.toString() + "|" + qtde.toString() + "|" + total.toString());
-                                               adapter.notifyDataSetChanged();
+                PedidoCompraItem item = new PedidoCompraItem();
+                item.setDescricaoItem(descricaoProduto);
+                item.setPrecoCusto(custo);
+                item.setQtdeItem(qtde);
+                item.setTotalItem(total);
+                itens.add(item);
+                adapter.notifyDataSetChanged();
 
-
-                                               // recuperando o texto digitado pelo usuario
-//                                               EditText txtSerie = (EditText) findViewById(R.id.txtSerie);
-//                                               String serie = txtSerie.getText().toString();
-//                                               // caso o texto for preenchido, adiciona na lista e atualiza o adapter
-//                                               // caso contrario exibe uma mensagem solicitando ao usuário que digite uma série
-//                                               if (serie.length() > 0) {
-//                                                   txtSerie.setText("");
-//                                                   txtSerie.findFocus();
-//                                                   series.add(serie);
-//                                                   adapter.notifyDataSetChanged();
-//                                               } else {
-//                                                   Toast.makeText(MainActivity.this, "Digite o nome da série", Toast.LENGTH_SHORT).show();
-//                                               }
-                                           }
-                                       }
-        );
+                limpaTela();
+            }
+        });
     }
 
     protected void onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,10 +100,10 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             // Create an array to populate the spinner
             itemlist = new ArrayList<String>();
 
-
             // CHAMA A CLASSE JSON E PASSA A URL PARA BAIXAR O ARQUIVO COM OS PRODUTOS NO FORMATO JSON
-            jsonobject = JSON.getJSONfromURL("http://10.0.2.2:81/ws_sgestao/Json/ProdutoWS.json");
-
+            //jsonobject = JSON.getJSONfromURL("http://10.0.2.2:81/ws_sgestao/Json/ProdutoWS.json");
+            jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/Json/ProdutoWS.json");
+            http://sgestao.hol.es/Json/ProdutoWS.json
             try {
                 // ADICIONA UM ITEM NA LISTA DE PRODUTOS PARA SERVIR DE HINT DO SPINNER
                 Produto prod0 = new Produto();
@@ -117,7 +123,6 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     jsonobject = jsonarray.getJSONObject(i);
 
                     Produto prod = new Produto();
-
                     prod.set_id(jsonobject.optInt("idproduto"));
                     prod.setProdutoDescricao(jsonobject.optString("produtodescricao"));
                     prod.setProdutoPrecovenda(jsonobject.optDouble("produtoprecovenda"));
@@ -152,13 +157,14 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                     final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
                     final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
-                    EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
+                    final EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
                     descricaoProduto = itemlist.get(position).toString();
 
                     //ALIMENTA AS VARIAVEIS PARA CALCULAR O TOTAL DO PRODUTO
                     custo = Double.parseDouble(item.get(position).get_produtoPrecoCusto().toString());
                     qtde = Double.parseDouble("1.00");
                     total = custo * qtde;
+                    //total = Double.valueOf(formato.format(total));
 
                     //SETA OS VALORES NOS EDITTEXT
                     edtCusto.setText(custo.toString());
@@ -175,15 +181,16 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                             if(hasFocus){   //SET FOCUS
                                 custo = Double.parseDouble(edtCusto.getText().toString());
                                 total = custo * qtde;
+                                //total = Double.valueOf(formato.format(total));
                                 edttotal.setText(total.toString());
                             }else {       //LOST FOCUS
                                 qtde = Double.parseDouble(edtQtde.getText().toString());
                                 total = custo * qtde;
+                                //total = Double.valueOf(formato.format(total));
                                 edttotal.setText(total.toString());
                             }
                         }
                     });
-
                 }
 
                 @Override
@@ -191,5 +198,17 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void limpaTela(){
+        final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
+        final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
+        final EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
+        Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
+
+        edtCusto.setText("0.00");
+        edtQtde.setText("1.00");
+        edtTotal.setText("0.00");
+        spnProduto2.setSelection(0);
     }
 }
