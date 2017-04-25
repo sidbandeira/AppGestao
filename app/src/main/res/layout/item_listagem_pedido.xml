@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txtdescricao"
+        android:id="@+id/txtDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:textSize="20dp"
-        android:text="descricao do produto"/>
+        android:text="descricao do produto"
+        android:textColor="#ffa602"
+        android:layout_marginLeft="4dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/txtdescricao">
-    <TextView
-        android:id="@+id/txtCusto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="0.00"
-        android:textAlignment="textEnd"
-        android:layout_weight="3"/>
-
-    <TextView
-        android:id="@+id/txtX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text=" (x)"
-        android:layout_weight="0"/>
-
-    <TextView
-        android:id="@+id/txtQtde"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="0.00"
-        android:textAlignment="textEnd"
-        android:layout_weight="3"/>
-
+        android:padding="5sp"
+        >
         <TextView
-            android:id="@+id/txtIgual"
+            android:id="@+id/txtUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:textSize="20dp"
-            android:text=" (=)"
-            android:layout_weight="0"/>
+            android:textAlignment="viewEnd"
+            android:text="unit"
+            android:textColor="#ffa602"
+            android:layout_toRightOf="@+id/imgMenu"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/txtTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
-        android:textSize="20dp"
-        android:text="0.00"
-        android:layout_weight="3"/>
+
+        <TextView
+            android:id="@+id/txtQtde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="20dp"
+            android:textAlignment="viewEnd"
+            android:text="Qtde"
+            android:textColor="#ffa602"
+            android:layout_toRightOf="@+id/imgMenu"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"/>
+
+
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="20dp"
+            android:textAlignment="viewEnd"
+            android:text="Qtde"
+            android:textColor="#ffa602"
+            android:layout_toRightOf="@+id/imgMenu"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"/>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
