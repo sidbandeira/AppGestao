@@ -77,6 +77,7 @@
             android:id="@+id/edtCusto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
             android:textSize="20sp"
             android:layout_weight="1" />
 
@@ -89,6 +90,7 @@
             android:id="@+id/edtQtde"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
             android:textSize="20sp"
             android:layout_weight="1"/>
 
@@ -100,6 +102,7 @@
             android:id="@+id/edtTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
             android:textSize="20sp"
             android:layout_weight="1"/>
     </LinearLayout>
@@ -128,17 +131,33 @@
     </LinearLayout>
 
     <!-- LINEAR COM A LISTA DE PRODUTOS ADICIONADOS-->
-    <LinearLayout
-        android:layout_below="@+id/lnBotao"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ListView
+        <TextView
+            android:id="@+id/txtCabProduto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listProdutos" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lnBotao"
+            android:textSize="20dp"
+            android:text="Cód.-Descrição"
+            android:background="#ffa602"/>
 
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txtCabProduto2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCabProduto"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="  Vlr Unit.              Qtde.       Total Unit."
+            android:background="#ffa602"/>
+
+    <ListView
+        android:id="@+id/lstProdutos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#ffa602"
+        android:layout_below="@+id/txtCabProduto2">
+    </ListView>
 
 </RelativeLayout>
