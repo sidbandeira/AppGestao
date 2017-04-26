@@ -90,6 +90,9 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         View ListView = inflater.inflate(R.layout.item_listagem_pedido, null);
     }
 
+    public void btGravar(View view) {
+    }
+
     // Download JSON file AsyncTask
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
 
@@ -103,7 +106,6 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             // CHAMA A CLASSE JSON E PASSA A URL PARA BAIXAR O ARQUIVO COM OS PRODUTOS NO FORMATO JSON
             //jsonobject = JSON.getJSONfromURL("http://10.0.2.2:81/ws_sgestao/Json/ProdutoWS.json");
             jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/Json/ProdutoWS.json");
-            http://sgestao.hol.es/Json/ProdutoWS.json
             try {
                 // ADICIONA UM ITEM NA LISTA DE PRODUTOS PARA SERVIR DE HINT DO SPINNER
                 Produto prod0 = new Produto();
