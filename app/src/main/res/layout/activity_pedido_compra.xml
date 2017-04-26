@@ -31,13 +31,12 @@
         android:layout_below = "@+id/txtTitulo"
         android:textColor="#ffa602"
         android:textSize="20sp"/>
-
-    <EditText
+    <Spinner
+        android:id="@+id/spnFornecedor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edtFornecedor"
-        android:layout_below = "@+id/txtFornecedor"
-        android:textSize="20sp"/>
+        android:layout_height="35dp"
+        android:textColor="#ffa602">
+    </Spinner>
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -51,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data Pedido:"
-            android:layout_weight="0.67"
+            android:layout_weight="0.55"
             android:textColor="#ffa602"
             android:textSize="20sp"/>
 
@@ -60,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pagamento:"
-            android:layout_weight="2.83"
+            android:layout_weight="2.41"
             android:textColor="#ffa602"
             android:textSize="20sp"/>
 
@@ -73,20 +72,22 @@
         android:weightSum="1">
 
         <EditText
+            android:id="@+id/edtData"
             android:layout_width="114dp"
             android:layout_height="wrap_content"
-            android:inputType="date"
+            android:layout_weight="0.40"
             android:ems="10"
-            android:id="@+id/edtData"
-            android:textSize="20sp"
-            android:layout_weight="0.40" />
+            android:inputType="date"
+            android:textSize="20sp" />
+
 
         <EditText
             android:id="@+id/edtPagamento"
-            android:layout_width="190dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_below = "@+id/edtPagamento"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:layout_weight="0.33" />
 
     </LinearLayout>
 

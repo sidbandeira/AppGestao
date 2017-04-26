@@ -10,14 +10,6 @@
     tools:context="com.example.sidnei.appgestao.pedidoCompra.PedidoCompraItemActivity"
     android:background="@drawable/fundo_padrao">
 
-    <!--<TextView-->
-        <!--android:id="@+id/txtTitProduto"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Selecione um produto:"-->
-        <!--android:textColor="#ffa602"-->
-        <!--android:textSize="20sp"/>-->
-
     <Spinner
         android:id="@+id/spnProduto2"
         android:layout_width="match_parent"
@@ -113,12 +105,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/lnVlrProd">
 
         <Button
             android:id="@+id/btAdicionar"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:layout_width="219dp"
             android:layout_height="36dp"
             android:text="Adicionar"
@@ -131,6 +123,12 @@
     </LinearLayout>
 
     <!-- LINEAR COM A LISTA DE PRODUTOS ADICIONADOS-->
+    <LinearLayout
+        android:id="@+id/lnItens"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/lnBotao">
 
         <TextView
             android:id="@+id/txtCabProduto"
@@ -152,12 +150,57 @@
             android:text="  Vlr Unit.              Qtde.       Total Unit."
             android:background="#ffa602"/>
 
-    <ListView
-        android:id="@+id/lstProdutos"
+        <ListView
+            android:id="@+id/lstProdutos"
+            android:layout_width="match_parent"
+            android:layout_height="209dp"
+            android:layout_below="@+id/txtCabProduto2"
+            android:textColor="#ffa602"></ListView>
+    </LinearLayout>
+
+    <!-- LINEAR COM O TOTAL DO PEDIDO-->
+    <LinearLayout
+        android:id="@+id/lnTotal"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lnItens">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Total"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtTotPedido"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textAlignment="textEnd"
+            android:text="@null" />
+    </LinearLayout>
+
+    <!-- LINEAR COM A BOTAO SALVAR-->
+    <LinearLayout
+        android:id="@+id/lnBotaoGravar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffa602"
-        android:layout_below="@+id/txtCabProduto2">
-    </ListView>
+        android:orientation="horizontal"
+        android:layout_below="@+id/lnTotal"
+        android:layout_marginTop="10dp">
 
+        <Button
+            android:id="@+id/btGravarPedido"
+            android:layout_width="219dp"
+            android:layout_height="36dp"
+            android:text="Salvar"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.07"
+            android:background="#ffa602"
+            style="@style/Base.DialogWindowTitle.AppCompat"
+            android:onClick="btGravar"/>
+
+    </LinearLayout>
 </RelativeLayout>
