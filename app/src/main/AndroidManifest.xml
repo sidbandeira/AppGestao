@@ -16,22 +16,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:label="S-Gestão">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VendasActivity" />
-        <activity android:name=".PostosActivity" />
-        <activity android:name=".FechamentoCaixaActivity" />
-        <activity android:name=".ProdutosActivity" />
-        <activity android:name=".menu.MenuActivity" />
-        <activity android:name=".unidadeNegocio.SelecaoUnidadeActivity" />
-        <activity android:name=".pedidoCompra.PedidoCompraActivity" />
-        <activity android:name=".classeProduto.PedidoItemActivity" />
-        <activity android:name=".pedidoCompra.PedidoCompraItemActivity"></activity>
+        <activity android:name=".VendasActivity" android:label="Resumo de Vendas"/>
+        <activity android:name=".PostosActivity" android:label="Controle de Tanques "/>
+        <activity android:name=".FechamentoCaixaActivity" android:label="Fechamento de Caixa"/>
+        <activity android:name=".ProdutosActivity" android:label="Listagem de Produtos"/>
+        <activity android:name=".menu.MenuActivity" android:label="Menu"/>
+        <activity android:name=".unidadeNegocio.SelecaoUnidadeActivity" android:label="Unidades de Negócio"/>
+        <activity android:name=".pedidoCompra.PedidoCompraActivity" android:label="Pedido de Compra"/>
+        <activity android:name=".classeProduto.PedidoItemActivity" android:label="Seleção de Produtos"/>
+        <activity android:name=".pedidoCompra.PedidoCompraItemActivity" android:label="Seleção"></activity>
     </application>
 
 </manifest>
