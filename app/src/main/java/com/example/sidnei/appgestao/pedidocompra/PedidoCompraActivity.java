@@ -98,17 +98,22 @@ public class PedidoCompraActivity extends AppCompatActivity implements View.OnCl
         @Override
         protected void onPostExecute(Void args) {
             // SETA O SPINNER DO FORNECEDOR DA TELA DE PEDIDO
-            Spinner spnFornecedor = (Spinner) findViewById(R.id.spnFornecedor);
+            final Spinner spnFornecedor = (Spinner) findViewById(R.id.spnFornecedor);
 
             // SPINNER ADAPTER
             spnFornecedor.setAdapter(new ArrayAdapter<String>(PedidoCompraActivity.this,
                     android.R.layout.simple_spinner_dropdown_item, fornecedorlist));
 
-
             spnFornecedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
                 public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                    // METODO PARA SETAR O FOCO NO SPINNER AO ENTRAR NA TELA.
+                    arg0.post(new Runnable() {
+                        @Override
+                        public void run() {spnFornecedor.requestFocusFromTouch();}
+                    });
 
                     //final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
                     //final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
