@@ -7,7 +7,8 @@ import android.widget.EditText;
 public abstract class Mascara {
 
     public enum MaskType {
-        CNPJ("##.###.###/####-##"), CPF("###.###.###-##"), CEP("#####-###"), TEL("(##) #########"), DATA("##/##/####");
+        CNPJ("##.###.###/####-##"), CPF("###.###.###-##"), CEP("#####-###"), TEL("(##) #########"),
+        DATA("##/##/####"), DECIMAL("#.###");
 
         String mask;
 
