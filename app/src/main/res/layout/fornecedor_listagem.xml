@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_padrao">
 
     <TextView
         android:id="@+id/txtCodFornecedor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:text="cod"
         android:textColor="#ffa602"
         android:layout_marginLeft="4dp" />
@@ -19,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:text="descricao do produto"
         android:textColor="#ffa602"
         android:layout_marginLeft="4dp" />

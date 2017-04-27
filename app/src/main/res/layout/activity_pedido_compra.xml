@@ -35,7 +35,7 @@
         android:id="@+id/spnFornecedor"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:textColor="#ffa602">
+        style="@style/Base.DialogWindowTitle.AppCompat">
     </Spinner>
 
     <LinearLayout

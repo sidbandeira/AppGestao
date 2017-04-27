@@ -69,9 +69,10 @@
             android:id="@+id/edtCusto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:textAlignment="textEnd"
-            android:textSize="20sp"
-            android:layout_weight="1" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,21 +83,24 @@
             android:id="@+id/edtQtde"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:textAlignment="textEnd"
-            android:textSize="20sp"
-            android:layout_weight="1"/>
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(=)"/>
+
         <EditText
             android:id="@+id/edtTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:textAlignment="textEnd"
-            android:textSize="20sp"
-            android:layout_weight="1"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
     <!-- LINEAR DO BOTAO ADICIONAR-->
@@ -153,7 +157,7 @@
         <ListView
             android:id="@+id/lstProdutos"
             android:layout_width="match_parent"
-            android:layout_height="209dp"
+            android:layout_height="179dp"
             android:layout_below="@+id/txtCabProduto2"
             android:textColor="#ffa602"></ListView>
     </LinearLayout>
@@ -186,7 +190,7 @@
     <LinearLayout
         android:id="@+id/lnBotaoGravar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/lnTotal"
         android:layout_marginTop="10dp">
