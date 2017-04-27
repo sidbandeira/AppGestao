@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,6 +44,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     Double qtde = 0.00;
     Double total = 0.00;
     String descricaoProduto = "";
+    String resultado = "";
 
     private AdapterItemCompra adapter;
     // FORMATA O VALOR DOUBLE COM TRES DECIMAIS
@@ -52,6 +54,8 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         // recuperando a listview declarada em main.xml para poder definir o adapter
         ListView listagem = (ListView) findViewById(R.id.lstProdutos);
@@ -76,7 +80,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                 item.setDescricaoItem(descricaoProduto);
                 item.setPrecoCusto(custo);
                 item.setQtdeItem(qtde);
-                item.setTotalItem(total);
+                item.setTotalItem(Double.parseDouble(resultado));
                 itens.add(item);
                 adapter.notifyDataSetChanged();
 
@@ -146,7 +150,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         protected void onPostExecute(Void args) {
             //adicionar();
             // SETA O SPINNER DA TELA DE PEDIDOITEM
-            Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
+            final Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
 
             // SPINNER ADAPTER
             spnProduto2.setAdapter(new ArrayAdapter<String>(PedidoCompraItemActivity.this,
@@ -162,34 +166,45 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     final EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
                     descricaoProduto = itemlist.get(position).toString();
 
+                    // METODO PARA SETAR O FOCO NO SPINNER AO ENTRAR NA TELA.
+                    arg0.post(new Runnable() {
+                        @Override
+                        public void run() {spnProduto2.requestFocusFromTouch();}
+                    });
+
                     //ALIMENTA AS VARIAVEIS PARA CALCULAR O TOTAL DO PRODUTO
                     custo = Double.parseDouble(item.get(position).get_produtoPrecoCusto().toString());
                     qtde = Double.parseDouble("1.00");
                     total = custo * qtde;
-                    //total = Double.valueOf(formato.format(total));
+                    resultado = String.format("%.3f", total);
+                    resultado = resultado.replace(",", ".");
 
                     //SETA OS VALORES NOS EDITTEXT
                     edtCusto.setText(custo.toString());
                     edtQtde.setText(qtde.toString());
-                    edtTotal.setText(total.toString());
+                    edtTotal.setText(resultado);
 
                     //METODO PARA ATUALIZAR O TOTAL QUANDO SETAR OU PERDER O FOCO DO CAMPO QUANTIDADE.
                     edtQtde.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                         @Override
                         public void onFocusChange(View v, boolean hasFocus) {
                             EditText edttotal = (EditText) findViewById(R.id.edtTotal);
+                            //edttotal.addTextChangedListener(Mascara.insert(Mascara.MaskType.DECIMAL,  edttotal));
 
                             //VERIFICA QUAL A SITUACAO DO FOCO
                             if(hasFocus){   //SET FOCUS
                                 custo = Double.parseDouble(edtCusto.getText().toString());
                                 total = custo * qtde;
-                                //total = Double.valueOf(formato.format(total));
-                                edttotal.setText(total.toString());
+                                resultado = String.format("%.3f", total);
+                                resultado = resultado.replace(",", ".");
+
+                                edttotal.setText(resultado);
                             }else {       //LOST FOCUS
                                 qtde = Double.parseDouble(edtQtde.getText().toString());
                                 total = custo * qtde;
-                                //total = Double.valueOf(formato.format(total));
-                                edttotal.setText(total.toString());
+                                resultado = String.format("%.3f", total);
+                                resultado = resultado.replace(",", ".");
+                                edttotal.setText(resultado);
                             }
                         }
                     });
