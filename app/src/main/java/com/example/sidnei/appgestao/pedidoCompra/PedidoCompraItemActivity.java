@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.classeProduto.Produto;
@@ -45,6 +46,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     Double total = 0.00;
     String descricaoProduto = "";
     String resultado = "";
+    Double subtotal = 0.00;
 
     private AdapterItemCompra adapter;
     // FORMATA O VALOR DOUBLE COM TRES DECIMAIS
@@ -54,6 +56,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
+        final TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -154,7 +157,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
             // SPINNER ADAPTER
             spnProduto2.setAdapter(new ArrayAdapter<String>(PedidoCompraItemActivity.this,
-                    android.R.layout.simple_spinner_dropdown_item, itemlist));
+                    android.R.layout.simple_dropdown_item_1line, itemlist));
 
             // EXECUTA A AÇÃO QUANDO CLICADO EM UM ITEM DO SPINNER
             spnProduto2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -163,7 +166,8 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                     final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
                     final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
-                    final EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
+                    final TextView edtTotal = (TextView) findViewById(R.id.txtTotalItem);
+                    final TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
                     descricaoProduto = itemlist.get(position).toString();
 
                     // METODO PARA SETAR O FOCO NO SPINNER AO ENTRAR NA TELA.
@@ -178,6 +182,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     total = custo * qtde;
                     resultado = String.format("%.3f", total);
                     resultado = resultado.replace(",", ".");
+                    subtotal += total;
 
                     //SETA OS VALORES NOS EDITTEXT
                     edtCusto.setText(custo.toString());
@@ -188,7 +193,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     edtQtde.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                         @Override
                         public void onFocusChange(View v, boolean hasFocus) {
-                            EditText edttotal = (EditText) findViewById(R.id.edtTotal);
+                            TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
                             //edttotal.addTextChangedListener(Mascara.insert(Mascara.MaskType.DECIMAL,  edttotal));
 
                             //VERIFICA QUAL A SITUACAO DO FOCO
@@ -198,13 +203,13 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                                 resultado = String.format("%.3f", total);
                                 resultado = resultado.replace(",", ".");
 
-                                edttotal.setText(resultado);
+                                txtTotalItem.setText(resultado);
                             }else {       //LOST FOCUS
                                 qtde = Double.parseDouble(edtQtde.getText().toString());
                                 total = custo * qtde;
                                 resultado = String.format("%.3f", total);
                                 resultado = resultado.replace(",", ".");
-                                edttotal.setText(resultado);
+                                txtTotalItem.setText(resultado);
                             }
                         }
                     });
@@ -220,12 +225,12 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     public void limpaTela(){
         final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
         final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
-        final EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
+        final TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
         Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
 
         edtCusto.setText("0.00");
         edtQtde.setText("1.00");
-        edtTotal.setText("0.00");
+        txtTotalItem.setText("0.00");
         spnProduto2.setSelection(0);
     }
 }
