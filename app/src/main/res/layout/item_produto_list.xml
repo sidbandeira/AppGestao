@@ -9,15 +9,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@null"
+        android:text="cod"
         android:id="@+id/txtIdProduto"
+        android:textSize="20dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@null"
+        android:text="Descricao"
+        android:textSize="20dp"
         android:id="@+id/txtProdutoDescricao"
         />
 
@@ -25,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@null"
+        android:text="custo"
+        android:textSize="20dp"
         android:id="@+id/txtProdutoPrecoCusto"
         />
 
@@ -33,7 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@null"
+        android:text="Venda"
+        android:textSize="20dp"
         android:id="@+id/txtProdutoPrecoVenda"
         />
 
