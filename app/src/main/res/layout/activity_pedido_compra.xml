@@ -31,12 +31,13 @@
         android:layout_below = "@+id/txtTitulo"
         android:textColor="#ffa602"
         android:textSize="20sp"/>
+
     <Spinner
         android:id="@+id/spnFornecedor"
+        style="@style/Base.DialogWindowTitle.AppCompat"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        style="@style/Base.DialogWindowTitle.AppCompat">
-    </Spinner>
+        android:background="@drawable/borda_preta"></Spinner>
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -59,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pagamento:"
-            android:layout_weight="2.41"
+            android:layout_weight="1.74"
             android:textColor="#ffa602"
             android:textSize="20sp"/>
 
@@ -68,39 +69,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/edtData"
-            android:layout_width="114dp"
+            android:layout_width="112dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
             android:ems="10"
             android:inputType="date"
-            android:textSize="20sp" />
-
-
-        <EditText
-            android:id="@+id/edtPagamento"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_below = "@+id/edtPagamento"
             android:textSize="20sp"
-            android:layout_weight="0.33" />
+            android:background="@drawable/borda_preta"
+            android:layout_weight="0.07" />
+
+        <TextView
+            android:id="@+id/txtEspaco"
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.03"
+            android:ems="10"
+            android:inputType="date"
+            android:textSize="20sp"
+            />
+
+        <Spinner
+            android:id="@+id/spnFormaPgto"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.53"
+            android:background="@drawable/borda_preta">
+        </Spinner>
+
+
+
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btnProdutos"
-        android:layout_marginTop="25dp"
+        style="@style/Base.DialogWindowTitle.AppCompat"
         android:layout_width="219dp"
         android:layout_height="36dp"
-        android:text="Adicionar Produtos"
-        android:onClick="IncluirClick"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
         android:layout_weight="0.07"
         android:background="#ffa602"
-        style="@style/Base.DialogWindowTitle.AppCompat" />
+        android:onClick="AdicionarProduto"
+        android:text="Adicionar Produtos" />
 
 </LinearLayout>

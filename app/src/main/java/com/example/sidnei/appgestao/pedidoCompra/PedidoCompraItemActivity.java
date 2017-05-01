@@ -1,5 +1,6 @@
 package com.example.sidnei.appgestao.pedidoCompra;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.classeProduto.Produto;
+import com.example.sidnei.appgestao.pedidoCompra.Adaptadores.AdapterItemCompra;
+import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompraItem;
 import com.example.sidnei.appgestao.utilitario.JSON;
 
 import org.json.JSONArray;
@@ -30,15 +33,18 @@ import java.util.ArrayList;
 public class PedidoCompraItemActivity extends AppCompatActivity {
     JSONObject jsonobject;
     JSONArray jsonarray;
-
     ArrayList<String> itemlist;
     ArrayList<Produto> item;
-
     ArrayList<String> itemlistpedido;
     ArrayList<PedidoCompraItem> itempedido;
     private ArrayList<PedidoCompraItem> itens = new ArrayList<PedidoCompraItem>();
-
     ArrayList<String> listaprodutos = new ArrayList<String>();
+
+    //VARIAVEIS COM AS INFORMAÇOES DO PEDIDOCOMPRA
+    Integer codfornecedor;
+    String descricaofornecedor;
+    String datapedido;
+    String formapgto;
 
     //VARIAVEIS PARA CALCULAR OS VALORES DO PRODUTO SELECIONADO
     Double custo = 0.00;
@@ -56,26 +62,35 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
-        final TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
+        TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
 
+        //RECEBE O VALOR DAS VARIAVEIS PASSADAS DA PEDIDOCOMPRAACTIVITY
+        Intent itPedidoCompra = getIntent();
+        codfornecedor = Integer.parseInt(itPedidoCompra.getStringExtra("codfornecedor"));
+        descricaofornecedor = itPedidoCompra.getStringExtra("descricaofornecedor");
+        datapedido = itPedidoCompra.getStringExtra("datapedido");
+        formapgto = itPedidoCompra.getStringExtra("formapgto");
+
+        //COMANDO PARA SUPRIMIR O TECLADO AO ABRIR A TELA
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        // recuperando a listview declarada em main.xml para poder definir o adapter
+        // RECUPERNADO A LISTVIEW DECLARADA NO XML PARA PODER DEFINIR O ADAPTER
         ListView listagem = (ListView) findViewById(R.id.lstProdutos);
 
-        // recupera o button adicionar declarado  no xml
+        // RECUPERA O BUTTON ACICIONAR DECLARADO NO XML
         Button btAdicionar = (Button) findViewById(R.id.btAdicionar);
 
-        //Cria o adapter
+        //CRIA O ADAPTER
         adapter = new AdapterItemCompra(this, itens);
 
-        //Define o Adapter
+        //DEFINE O ADAPTER
         listagem.setAdapter(adapter);
         listagem.setCacheColorHint(Color.TRANSPARENT);
 
-        // Download JSON file AsyncTask
+        // Download DO ARQUIVO JSON DE FORMA ASSINCRONA
         new DownloadJSON().execute();
 
+        // RESPONSAVEL POR EXECUTAR A AÇÃO DO CLIQUE DO BOTÃO ADICIONAR
         btAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
@@ -97,17 +112,14 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         View ListView = inflater.inflate(R.layout.item_listagem_pedido, null);
     }
 
-    public void btGravar(View view) {
-    }
-
-    // Download JSON file AsyncTask
+    // METODO QUE FAZ O DOWNLOAD DO ARQUIVO JSON
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
-            // Locate the WorldPopulation Class
+            // ARRAY COM A CLASSE PRODUTO
             item = new ArrayList<Produto>();
-            // Create an array to populate the spinner
+            // CRIA O ARRAY DE PRODUTOS PARA ALIMENTAR O SPINNER
             itemlist = new ArrayList<String>();
 
             // CHAMA A CLASSE JSON E PASSA A URL PARA BAIXAR O ARQUIVO COM OS PRODUTOS NO FORMATO JSON
@@ -116,13 +128,11 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             try {
                 // ADICIONA UM ITEM NA LISTA DE PRODUTOS PARA SERVIR DE HINT DO SPINNER
                 Produto prod0 = new Produto();
-
                 prod0.set_id(0);
                 prod0.setProdutoDescricao("Selecione um Produto...");
                 prod0.setProdutoPrecovenda(0.00);
                 prod0.setProdutoPrecoCusto(0.00);
                 item.add(prod0);
-
                 // PREENCHE O SPINNER COM O ITEM DO HINT
                 itemlist.add("Selecione um produto ...");
 
@@ -140,7 +150,6 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
                     // PREENCHE O SPINNER COM O ID E DESCRICAO DO PRODUTO
                     itemlist.add(jsonobject.optString("idproduto")+ "- " + jsonobject.optString("produtodescricao"));
-
                 }
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
@@ -151,7 +160,6 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void args) {
-            //adicionar();
             // SETA O SPINNER DA TELA DE PEDIDOITEM
             final Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
 
@@ -222,6 +230,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         }
     }
 
+    // METODO RESPONSAVEL POR LIMPAR OS DADOS DA TELA.
     public void limpaTela(){
         final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
         final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);

@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.pedidoCompra.ProdutoHttp;
+import com.example.sidnei.appgestao.pedidoCompra.Repositorio.ProdutoHttp;
 
 import java.util.ArrayList;
 import java.util.List;

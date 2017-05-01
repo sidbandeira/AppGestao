@@ -174,7 +174,7 @@
         <ListView
             android:id="@+id/lstProdutos"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="173dp"
             android:layout_below="@+id/txtCabProduto2"
             android:textColor="#ffa602"></ListView>
     </LinearLayout>

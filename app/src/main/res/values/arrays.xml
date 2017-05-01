@@ -15,4 +15,9 @@
         <item>@drawable/tqvazio</item>
     </array>
 
+    <array name="formapagamento">
+        <item>A Vista</item>
+        <item>A Prazo</item>
+        <item>Outro</item>>
+    </array>
 </resources>

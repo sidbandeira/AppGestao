@@ -11,17 +11,27 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.sidnei.appgestao.R;
+import com.example.sidnei.appgestao.pedidoCompra.Classes.Fornecedor;
 import com.example.sidnei.appgestao.utilitario.JSON;
 import com.example.sidnei.appgestao.utilitario.Mascara;
+import com.example.sidnei.appgestao.utilitario.Validacoes;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class PedidoCompraActivity extends AppCompatActivity implements View.OnClickListener {
+public class PedidoCompraActivity extends AppCompatActivity {
+    public static Integer codFornecedor = 0;
+    public static String descricaofornecedor = "";
+    public static String datapedido = "";
+    public static String formapgto = "";
+    public static Spinner spnFornecedor;
+
     JSONObject jsonobject;
     JSONArray jsonarray;
     private Button btnProdutos;
@@ -35,17 +45,41 @@ public class PedidoCompraActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_pedido_compra);
 
         edtData = (EditText) findViewById(R.id.edtData);
-
         edtData.addTextChangedListener(Mascara.insert(Mascara.MaskType.DATA,  edtData));
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = sdf.format(date);
+        edtData.setText(dateString);
+
         btnProdutos = (Button) findViewById(R.id.btnProdutos);
-        btnProdutos.setOnClickListener(this);
 
         new DownloadJSON().execute();
     }
+
+    public void AdicionarProduto(View view) {
+
+        if(descricaofornecedor.toString().contains("Selecione") || descricaofornecedor.toString().equals("")){
+            Toast.makeText(this,"Selecione um fornecedor!",Toast.LENGTH_LONG).show();
+        }else{
+            if(Validacoes.validaData(edtData.getText().toString(),"dd/MM/yy") == false){
+                Toast.makeText(this,"Informe uma data valida!",Toast.LENGTH_LONG).show();
+                edtData.requestFocus();
+            }else{
+                Intent it = new Intent(this, PedidoCompraItemActivity.class);
+                it.putExtra("codfornecedor",codFornecedor.toString());
+                it.putExtra("descricaofornecedor", descricaofornecedor);
+                it.putExtra("datapedido", datapedido);
+                it.putExtra("formapgto", formapgto);
+                startActivityForResult(it, 1);
+            }
+        }
+    }
+
     @Override
-    public void onClick(View v) {
-        Intent it = new Intent(this, PedidoCompraItemActivity.class);
-        startActivity(it);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1){
+            Toast.makeText(this,"ok",Toast.LENGTH_LONG).show();
+        }
     }
 
     // Download JSON file AsyncTask
@@ -53,9 +87,9 @@ public class PedidoCompraActivity extends AppCompatActivity implements View.OnCl
 
         @Override
         protected Void doInBackground(Void... params) {
-            // Locate the WorldPopulation Class
+            // Localiza a classe Fornecedor
             fornecedor = new ArrayList<Fornecedor>();
-            // Create an array to populate the spinner
+            // Cria o Array para popular o  spinner
             fornecedorlist = new ArrayList<String>();
 
             // CHAMA A CLASSE JSON E PASSA A URL PARA BAIXAR O ARQUIVO COM OS FORNECEDORES NO FORMATO JSON
@@ -85,13 +119,11 @@ public class PedidoCompraActivity extends AppCompatActivity implements View.OnCl
 
                     // PREENCHE O SPINNER COM O ID E RAZAO SOCIAL DO FORNECEDOR
                     fornecedorlist.add(jsonobject.optString("id")+ "- " + jsonobject.optString("razaosocial"));
-
                 }
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
-
             return null;
         }
 
@@ -99,58 +131,22 @@ public class PedidoCompraActivity extends AppCompatActivity implements View.OnCl
         protected void onPostExecute(Void args) {
             // SETA O SPINNER DO FORNECEDOR DA TELA DE PEDIDO
             final Spinner spnFornecedor = (Spinner) findViewById(R.id.spnFornecedor);
-
             // SPINNER ADAPTER
-            spnFornecedor.setAdapter(new ArrayAdapter<String>(PedidoCompraActivity.this,
-                    android.R.layout.simple_spinner_dropdown_item, fornecedorlist));
-
+            spnFornecedor.setAdapter(new ArrayAdapter<String>(PedidoCompraActivity.this,android.R.layout.simple_spinner_dropdown_item, fornecedorlist));
             spnFornecedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
                 @Override
                 public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-
                     // METODO PARA SETAR O FOCO NO SPINNER AO ENTRAR NA TELA.
                     arg0.post(new Runnable() {
                         @Override
                         public void run() {spnFornecedor.requestFocusFromTouch();}
                     });
-
-                    //final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
-                    //final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
-                    //final EditText edtTotal = (EditText) findViewById(R.id.edtTotal);
-                    //descricaoProduto = itemlist.get(position).toString();
-
-                    //ALIMENTA AS VARIAVEIS PARA CALCULAR O TOTAL DO PRODUTO
-                    //custo = Double.parseDouble(item.get(position).get_produtoPrecoCusto().toString());
-                    //qtde = Double.parseDouble("1.00");
-                    //total = custo * qtde;
-                    //total = Double.valueOf(formato.format(total));
-
-                    //SETA OS VALORES NOS EDITTEXT
-                    //edtCusto.setText(custo.toString());
-                    //edtQtde.setText(qtde.toString());
-                    //edtTotal.setText(total.toString());
-
-                    //METODO PARA ATUALIZAR O TOTAL QUANDO SETAR OU PERDER O FOCO DO CAMPO QUANTIDADE.
-                    //edtQtde.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                      //  @Override
-                     //   public void onFocusChange(View v, boolean hasFocus) {
-                            //EditText edttotal = (EditText) findViewById(R.id.edtTotal);
-
-                            //VERIFICA QUAL A SITUACAO DO FOCO
-                            //if(hasFocus){   //SET FOCUS
-                            //    custo = Double.parseDouble(edtCusto.getText().toString());
-                            //    total = custo * qtde;
-                                //total = Double.valueOf(formato.format(total));
-                            //    edttotal.setText(total.toString());
-                            //}else {       //LOST FOCUS
-                            //    qtde = Double.parseDouble(edtQtde.getText().toString());
-                            //    total = custo * qtde;
-                                //total = Double.valueOf(formato.format(total));
-                            //    edttotal.setText(total.toString());
-                            //}
-                     //   }
-                    //});
+                    String spfornecedor = fornecedorlist.get(position).toString();;
+                    String[] partes = spfornecedor.split("-");
+                    if (position != 0){
+                        codFornecedor = Integer.parseInt(partes[0]);
+                        descricaofornecedor = partes[1];
+                    }
                 }
 
                 @Override
@@ -158,6 +154,26 @@ public class PedidoCompraActivity extends AppCompatActivity implements View.OnCl
                 }
             });
 
+            //SPINNER PARA LISTAR AS FORMAS DE PAGAMENTO DO PEDIDO
+            Spinner spnFormaPgto = (Spinner) findViewById(R.id.spnFormaPgto);
+            ArrayAdapter adapter = ArrayAdapter.createFromResource( PedidoCompraActivity.this, R.array.formapagamento , android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spnFormaPgto.setAdapter(adapter);
+
+            spnFormaPgto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    formapgto = parent.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            datapedido = edtData.getText().toString();
         }
     }
 }

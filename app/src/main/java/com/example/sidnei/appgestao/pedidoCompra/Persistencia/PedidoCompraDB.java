@@ -1,9 +1,12 @@
-package com.example.sidnei.appgestao.pedidoCompra;
+package com.example.sidnei.appgestao.pedidoCompra.Persistencia;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompra;
+import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompraItem;
 
 public class PedidoCompraDB extends SQLiteOpenHelper{
 

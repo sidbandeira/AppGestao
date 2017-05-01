@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidoCompra;
+package com.example.sidnei.appgestao.pedidoCompra.Adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.sidnei.appgestao.R;
+import com.example.sidnei.appgestao.pedidoCompra.Classes.Fornecedor;
 
 import java.util.ArrayList;
 

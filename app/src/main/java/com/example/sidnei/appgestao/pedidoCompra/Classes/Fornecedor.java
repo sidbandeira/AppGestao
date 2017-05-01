@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidoCompra;
+package com.example.sidnei.appgestao.pedidoCompra.Classes;
 
 public class Fornecedor {
     public int id;

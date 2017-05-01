@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidoCompra;
+package com.example.sidnei.appgestao.pedidoCompra.Repositorio;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
