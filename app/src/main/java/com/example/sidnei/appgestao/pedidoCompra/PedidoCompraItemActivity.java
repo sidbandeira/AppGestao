@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.classeProduto.Produto;
@@ -39,6 +40,13 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     ArrayList<PedidoCompraItem> itempedido;
     private ArrayList<PedidoCompraItem> itens = new ArrayList<PedidoCompraItem>();
     ArrayList<String> listaprodutos = new ArrayList<String>();
+    private EditText edtCusto;
+    private EditText edtQtde;
+    private TextView txtSubTotalPedido;
+    private TextView txtTotalItem;
+    private Spinner spnProduto2;
+    private Button btAdicionar;
+    private Button btGravarPedido;
 
     //VARIAVEIS COM AS INFORMAÇOES DO PEDIDOCOMPRA
     Integer codfornecedor;
@@ -63,6 +71,9 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
         TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
+        final TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
+        final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
+        final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
 
         //RECEBE O VALOR DAS VARIAVEIS PASSADAS DA PEDIDOCOMPRAACTIVITY
         Intent itPedidoCompra = getIntent();
@@ -90,19 +101,53 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         // Download DO ARQUIVO JSON DE FORMA ASSINCRONA
         new DownloadJSON().execute();
 
+        //METODO PARA ATUALIZAR O TOTAL QUANDO SETAR OU PERDER O FOCO DO CAMPO QUANTIDADE.
+        edtQtde.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                //VERIFICA QUAL A SITUACAO DO FOCO
+                if(hasFocus){   //SET FOCUS
+                    custo = Double.parseDouble(edtCusto.getText().toString());
+                    total = custo * qtde;
+                    resultado = String.format("%.3f", total);
+                    resultado = resultado.replace(",", ".");
+
+                    txtTotalItem.setText(resultado);
+                }else {       //LOST FOCUS
+                    qtde = Double.parseDouble(edtQtde.getText().toString());
+                    total = custo * qtde;
+                    resultado = String.format("%.3f", total);
+                    resultado = resultado.replace(",", ".");
+                    txtTotalItem.setText(resultado);
+                }
+            }
+        });
+
         // RESPONSAVEL POR EXECUTAR A AÇÃO DO CLIQUE DO BOTÃO ADICIONAR
         btAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                PedidoCompraItem item = new PedidoCompraItem();
-                item.setDescricaoItem(descricaoProduto);
-                item.setPrecoCusto(custo);
-                item.setQtdeItem(qtde);
-                item.setTotalItem(Double.parseDouble(resultado));
-                itens.add(item);
-                adapter.notifyDataSetChanged();
+                if(descricaoProduto.contains("Selecione")) {
+                    Toast.makeText(PedidoCompraItemActivity.this,"Selecione um produto!",Toast.LENGTH_SHORT).show();
+                }else{
+                    custo = Double.parseDouble(edtCusto.getText().toString());
+                    qtde = Double.parseDouble(edtQtde.getText().toString());
+                    total = custo * qtde;
+                    resultado = String.format("%.3f", total);
+                    resultado = resultado.replace(",", ".");
 
-                limpaTela();
+                    txtTotalItem.setText(resultado);
+
+                    PedidoCompraItem item = new PedidoCompraItem();
+                    item.setDescricaoItem(descricaoProduto);
+                    item.setPrecoCusto(custo);
+                    item.setQtdeItem(qtde);
+                    item.setTotalItem(Double.parseDouble(resultado));
+                    itens.add(item);
+                    adapter.notifyDataSetChanged();
+
+                    limpaTela();
+                }
             }
         });
     }
@@ -160,73 +205,50 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void args) {
-            // SETA O SPINNER DA TELA DE PEDIDOITEM
-            final Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
+            try {
+                final Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
+                final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
+                final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
+                final TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
 
-            // SPINNER ADAPTER
-            spnProduto2.setAdapter(new ArrayAdapter<String>(PedidoCompraItemActivity.this,
-                    android.R.layout.simple_dropdown_item_1line, itemlist));
+                // SPINNER ADAPTER
+                spnProduto2.setAdapter(new ArrayAdapter<String>(PedidoCompraItemActivity.this,
+                        android.R.layout.simple_dropdown_item_1line, itemlist));
 
-            // EXECUTA A AÇÃO QUANDO CLICADO EM UM ITEM DO SPINNER
-            spnProduto2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                // EXECUTA A AÇÃO QUANDO CLICADO EM UM ITEM DO SPINNER
+                spnProduto2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                    final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
-                    final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
-                    final TextView edtTotal = (TextView) findViewById(R.id.txtTotalItem);
-                    final TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
-                    descricaoProduto = itemlist.get(position).toString();
+                    @Override
+                    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                        descricaoProduto = itemlist.get(position).toString();
 
-                    // METODO PARA SETAR O FOCO NO SPINNER AO ENTRAR NA TELA.
-                    arg0.post(new Runnable() {
-                        @Override
-                        public void run() {spnProduto2.requestFocusFromTouch();}
-                    });
+                        // METODO PARA SETAR O FOCO NO SPINNER AO ENTRAR NA TELA.
+                        arg0.post(new Runnable() {
+                            @Override
+                            public void run() {spnProduto2.requestFocusFromTouch();}
+                        });
 
-                    //ALIMENTA AS VARIAVEIS PARA CALCULAR O TOTAL DO PRODUTO
-                    custo = Double.parseDouble(item.get(position).get_produtoPrecoCusto().toString());
-                    qtde = Double.parseDouble("1.00");
-                    total = custo * qtde;
-                    resultado = String.format("%.3f", total);
-                    resultado = resultado.replace(",", ".");
-                    subtotal += total;
+                        //ALIMENTA AS VARIAVEIS PARA CALCULAR O TOTAL DO PRODUTO
+                        custo = Double.parseDouble(item.get(position).get_produtoPrecoCusto().toString());
+                        qtde = Double.parseDouble("1.00");
+                        total = custo * qtde;
+                        resultado = String.format("%.3f", total);
+                        resultado = resultado.replace(",", ".");
+                        subtotal += total;
 
-                    //SETA OS VALORES NOS EDITTEXT
-                    edtCusto.setText(custo.toString());
-                    edtQtde.setText(qtde.toString());
-                    edtTotal.setText(resultado);
-
-                    //METODO PARA ATUALIZAR O TOTAL QUANDO SETAR OU PERDER O FOCO DO CAMPO QUANTIDADE.
-                    edtQtde.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                            TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
-                            //edttotal.addTextChangedListener(Mascara.insert(Mascara.MaskType.DECIMAL,  edttotal));
-
-                            //VERIFICA QUAL A SITUACAO DO FOCO
-                            if(hasFocus){   //SET FOCUS
-                                custo = Double.parseDouble(edtCusto.getText().toString());
-                                total = custo * qtde;
-                                resultado = String.format("%.3f", total);
-                                resultado = resultado.replace(",", ".");
-
-                                txtTotalItem.setText(resultado);
-                            }else {       //LOST FOCUS
-                                qtde = Double.parseDouble(edtQtde.getText().toString());
-                                total = custo * qtde;
-                                resultado = String.format("%.3f", total);
-                                resultado = resultado.replace(",", ".");
-                                txtTotalItem.setText(resultado);
-                            }
-                        }
-                    });
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> arg0) {
-                }
-            });
+                        //SETA OS VALORES NOS EDITTEXT
+                        edtCusto.setText(custo.toString());
+                        edtQtde.setText(qtde.toString());
+                        txtTotalItem.setText(resultado);
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                    }
+                });
+            }catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
