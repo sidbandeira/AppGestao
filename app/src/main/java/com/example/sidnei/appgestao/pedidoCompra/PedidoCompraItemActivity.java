@@ -1,9 +1,11 @@
 package com.example.sidnei.appgestao.pedidoCompra;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +49,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     private Spinner spnProduto2;
     private Button btAdicionar;
     private Button btGravarPedido;
+    private ListView listagem;
 
     //VARIAVEIS COM AS INFORMAÇOES DO PEDIDOCOMPRA
     Integer codfornecedor;
@@ -60,7 +63,8 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     Double total = 0.00;
     String descricaoProduto = "";
     String resultado = "";
-    Double subtotal = 0.00;
+    Double subtotalItem = 0.00;
+    Double subtotalPedido = 0.00;
 
     private AdapterItemCompra adapter;
     // FORMATA O VALOR DOUBLE COM TRES DECIMAIS
@@ -70,7 +74,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
-        TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
+        final TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
         final TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
         final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
         final EditText edtQtde = (EditText) findViewById(R.id.edtQtde);
@@ -86,7 +90,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         // RECUPERNADO A LISTVIEW DECLARADA NO XML PARA PODER DEFINIR O ADAPTER
-        ListView listagem = (ListView) findViewById(R.id.lstProdutos);
+        final ListView listagem = (ListView) findViewById(R.id.lstProdutos);
 
         // RECUPERA O BUTTON ACICIONAR DECLARADO NO XML
         Button btAdicionar = (Button) findViewById(R.id.btAdicionar);
@@ -111,7 +115,6 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     total = custo * qtde;
                     resultado = String.format("%.3f", total);
                     resultado = resultado.replace(",", ".");
-
                     txtTotalItem.setText(resultado);
                 }else {       //LOST FOCUS
                     qtde = Double.parseDouble(edtQtde.getText().toString());
@@ -136,8 +139,11 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     resultado = String.format("%.3f", total);
                     resultado = resultado.replace(",", ".");
 
-                    txtTotalItem.setText(resultado);
+                    //txtTotalItem.setText(resultado);
 
+                    subtotalPedido += total;
+                    String tot = String.format("%.3f",subtotalPedido);
+                    txtSubTotalPedido.setText(tot);
                     PedidoCompraItem item = new PedidoCompraItem();
                     item.setDescricaoItem(descricaoProduto);
                     item.setPrecoCusto(custo);
@@ -148,6 +154,51 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
                     limpaTela();
                 }
+            }
+        });
+
+        listagem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PedidoCompraItemActivity.this);
+
+                // SETA UM TITULO PARA O DIALOG
+                alertDialogBuilder.setTitle("Excluir");
+
+                // SETA UMA MENSAGEM PARA O DIALOG
+                alertDialogBuilder
+                        .setMessage("Confirma exclusão do item?")
+                        .setCancelable(false)
+                        .setPositiveButton("Sim",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                final TextView txtTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
+                                String temp = txtTotalPedido.getText().toString();
+                                temp = temp.replace(",", ".");
+                                Double totPedido = Double.parseDouble(temp.toString());
+                                String result = "";
+                                subtotalPedido = totPedido;
+                                subtotalPedido -= itens.get(position).getTotalItem();
+                                result = String.format("%.3f", subtotalPedido);
+                                result = result.replace(",", ".");
+
+                                itens.remove(position);
+                                adapter.notifyDataSetChanged();
+
+                                txtSubTotalPedido.setText(result);
+                                limpaTela();
+                            }
+                        })
+                        .setNegativeButton("Não",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                // CRIA O DIALOG
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // EXIBE O DIALOG
+                alertDialog.show();
             }
         });
     }
@@ -234,12 +285,12 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                         total = custo * qtde;
                         resultado = String.format("%.3f", total);
                         resultado = resultado.replace(",", ".");
-                        subtotal += total;
+                        subtotalItem += total;
 
                         //SETA OS VALORES NOS EDITTEXT
                         edtCusto.setText(custo.toString());
                         edtQtde.setText(qtde.toString());
-                        txtTotalItem.setText(resultado);
+                        txtTotalItem.setText(subtotalItem.toString());
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> arg0) {
@@ -259,9 +310,10 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         final TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
         Spinner spnProduto2 = (Spinner) findViewById(R.id.spnProduto2);
 
+        spnProduto2.setSelection(0);
         edtCusto.setText("0.00");
         edtQtde.setText("1.00");
         txtTotalItem.setText("0.00");
-        spnProduto2.setSelection(0);
+        subtotalItem = 0.00;
     }
 }
