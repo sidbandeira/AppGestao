@@ -10,10 +10,12 @@ import com.example.sidnei.appgestao.pedidoCompra.Persistencia.PedidoCompraSQLHel
 public class PedidoCompraRepositorio {
     private PedidoCompraSQLHelper helper;
 
+    //CONSTRUTOR
     public PedidoCompraRepositorio(Context ctx) {
         helper = new PedidoCompraSQLHelper(ctx);
     }
 
+    //INSERIR UM PEDIDO DE COMPRA
     private long inserir(PedidoCompra compra) {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -32,10 +34,11 @@ public class PedidoCompraRepositorio {
         return id;
     }
 
+    //EDITAR UM PEDIDO DE COMPRA
     private int atualizar(PedidoCompra compra) {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(PedidoCompraSQLHelper.COLUNA_ID, compra._id);
+        cv.put(PedidoCompraSQLHelper.COLUNA_IDPEDIDO, compra._id);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDEMPRESA, compra.codEmpresa);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDUNIDADE, compra.codUnNegocio);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDFORNECEDOR, compra.idFornecedor);
@@ -46,12 +49,13 @@ public class PedidoCompraRepositorio {
         int linhasAfetadas = db.update(
                 PedidoCompraSQLHelper.TABELA,
                 cv,
-                PedidoCompraSQLHelper.COLUNA_ID +" = ?",
+                PedidoCompraSQLHelper.COLUNA_IDPEDIDO +" = ?",
                 new String[]{ String.valueOf(compra._id)});
         db.close();
         return linhasAfetadas;
     }
 
+    //VERIFICAR O TIPO DE GRAVAÇÃO SE EDIÇÃO OU INSERSÃO
     public void salvar(PedidoCompra compra) {
         if (compra._id == 0) {
             inserir(compra);
@@ -60,11 +64,12 @@ public class PedidoCompraRepositorio {
         }
     }
 
+    //EXCLUIR UM PEDIDO DE COMPRA
     public int excluir(PedidoCompra compra) {
         SQLiteDatabase db = helper.getWritableDatabase();
         int linhasAfetadas = db.delete(
                 PedidoCompraSQLHelper.TABELA,
-                PedidoCompraSQLHelper.COLUNA_ID +" = ?",
+                PedidoCompraSQLHelper.COLUNA_IDPEDIDO    +" = ?",
                 new String[]{ String.valueOf(compra._id)});
         db.close();
         return linhasAfetadas;
