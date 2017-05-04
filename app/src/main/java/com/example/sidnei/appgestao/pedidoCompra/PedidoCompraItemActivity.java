@@ -58,7 +58,9 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     //VARIAVEIS COM AS INFORMAÇOES DO PEDIDOCOMPRA
     private Integer codfornecedor;
     private String descricaofornecedor;
+    private String email;
     private String datapedido;
+    private String dataentrega;
     private String formapgto;
 
     //VARIAVEIS PARA CALCULAR OS VALORES DO PRODUTO SELECIONADO
@@ -86,7 +88,9 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         Intent itPedidoCompra = getIntent();
         codfornecedor = Integer.parseInt(itPedidoCompra.getStringExtra("codfornecedor"));
         descricaofornecedor = itPedidoCompra.getStringExtra("descricaofornecedor");
+        email = itPedidoCompra.getStringExtra("email");
         datapedido = itPedidoCompra.getStringExtra("datapedido");
+        dataentrega = itPedidoCompra.getStringExtra("dataprevisao");
         formapgto = itPedidoCompra.getStringExtra("formapgto");
 
         //COMANDO PARA SUPRIMIR O TECLADO AO ABRIR A TELA
@@ -223,7 +227,9 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         pedido.codEmpresa = MainActivity.codEmpresa;
         pedido.codUnNegocio = UnidadeNegocioListFragment.codUnidade;
         pedido.idFornecedor = codfornecedor;
+        pedido.email = email;
         pedido.dtPedido = datapedido;
+        pedido.dtEntrega = dataentrega;
         pedido.formapgto = formapgto;
         pedido.totalPedido = subtotalPedido;
         pedRep.salvar(pedido);

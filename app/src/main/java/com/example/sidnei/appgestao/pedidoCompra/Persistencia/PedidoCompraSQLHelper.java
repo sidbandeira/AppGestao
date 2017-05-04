@@ -15,7 +15,9 @@ public class PedidoCompraSQLHelper extends SQLiteOpenHelper {
     public static final String COLUNA_IDFORNECEDOR = "idfornecedor";
     public static final String COLUNA_IDEMPRESA = "codempresa";
     public static final String COLUNA_IDUNIDADE = "codunnegocio";
+    public static final String COLUNA_EMAIL = "email";
     public static final String COLUNA_DATAPEDIDO = "dtpedido";
+    public static final String COLUNA_DATAENTREGA = "dtentrega";
     public static final String COLUNA_FORMAPGTO = "formapgto";
     public static final String COLUNA_TOTALPEDIDO = "totalpedido";
 
@@ -43,8 +45,10 @@ public class PedidoCompraSQLHelper extends SQLiteOpenHelper {
                         COLUNA_IDFORNECEDOR +" INTEGER,"+
                         COLUNA_IDEMPRESA +" INTEGER,"+
                         COLUNA_IDUNIDADE +" INTEGER,"+
+                        COLUNA_EMAIL +" TEXT,"+
                         COLUNA_FORMAPGTO +" TEXT,"+
                         COLUNA_DATAPEDIDO +" TEXT,"+
+                        COLUNA_DATAENTREGA +" TEXT,"+
                         COLUNA_TOTALPEDIDO +" FLOAT)");
 
         // CRIA A TABELA PEDIDOCOMPRAIEM

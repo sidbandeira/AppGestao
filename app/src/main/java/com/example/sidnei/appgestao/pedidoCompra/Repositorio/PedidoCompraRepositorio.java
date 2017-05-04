@@ -22,7 +22,9 @@ public class PedidoCompraRepositorio {
         cv.put(PedidoCompraSQLHelper.COLUNA_IDEMPRESA, compra.codEmpresa);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDUNIDADE, compra.codUnNegocio);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDFORNECEDOR, compra.idFornecedor);
+        cv.put(PedidoCompraSQLHelper.COLUNA_EMAIL, compra.email);
         cv.put(PedidoCompraSQLHelper.COLUNA_DATAPEDIDO, compra.dtPedido);
+        cv.put(PedidoCompraSQLHelper.COLUNA_DATAENTREGA, compra.dtEntrega);
         cv.put(PedidoCompraSQLHelper.COLUNA_FORMAPGTO, compra.formapgto);
         cv.put(PedidoCompraSQLHelper.COLUNA_TOTALPEDIDO, compra.totalPedido);
 
@@ -42,7 +44,9 @@ public class PedidoCompraRepositorio {
         cv.put(PedidoCompraSQLHelper.COLUNA_IDEMPRESA, compra.codEmpresa);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDUNIDADE, compra.codUnNegocio);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDFORNECEDOR, compra.idFornecedor);
+        cv.put(PedidoCompraSQLHelper.COLUNA_EMAIL, compra.email);
         cv.put(PedidoCompraSQLHelper.COLUNA_DATAPEDIDO, compra.dtPedido);
+        cv.put(PedidoCompraSQLHelper.COLUNA_DATAENTREGA, compra.dtEntrega);
         cv.put(PedidoCompraSQLHelper.COLUNA_FORMAPGTO, compra.formapgto);
         cv.put(PedidoCompraSQLHelper.COLUNA_TOTALPEDIDO, compra.totalPedido);
 

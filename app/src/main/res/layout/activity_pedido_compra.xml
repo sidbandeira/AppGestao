@@ -39,12 +39,42 @@
         android:layout_height="35dp"
         android:background="@drawable/borda_preta"></Spinner>
 
+    <!--LINEAR DADOS E-MAIL-->
     <LinearLayout
+        android:id="@+id/lnEmail"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below = "@+id/spnFornecedor">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-mail:"
+            android:id="@+id/txtEmail"
+            android:layout_below = "@+id/txtTitulo"
+            android:textColor="#ffa602"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:background="@drawable/borda_preta" />
+        />
+
+    </LinearLayout>
+
+    <!--LINEAR DADOS DO PEDIDO-->
+    <LinearLayout
+        android:id="@+id/lndadoscab1"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below = "@+id/edtFornecedor">
+        android:layout_below = "@+id/lnEmail">
 
         <TextView
             android:id="@+id/txtData"
@@ -67,6 +97,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lndados1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -101,6 +132,44 @@
 
 
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lndadoscab2"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below = "@+id/lndados1">
+
+        <TextView
+            android:id="@+id/txtDataPrevisao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Entrega:"
+            android:layout_weight="0.55"
+            android:textColor="#ffa602"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lndados2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/edtDataEntrega"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:textSize="20sp"
+            android:background="@drawable/borda_preta"
+            android:layout_weight="0.10" />
 
     </LinearLayout>
 
