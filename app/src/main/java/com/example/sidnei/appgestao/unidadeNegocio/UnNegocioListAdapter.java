@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocio;
 
 import java.util.List;
 
