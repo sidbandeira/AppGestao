@@ -100,14 +100,6 @@
             android:layout_height="wrap_content"
             android:text=" (=) "/>
 
-        <!--<EditText-->
-            <!--android:id="@+id/edtTotal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:inputType="numberDecimal"-->
-            <!--android:textAlignment="textEnd"-->
-            <!--android:textSize="20sp" />-->
         <TextView
             android:id="@+id/txtTotalItem"
             android:layout_width="match_parent"
@@ -219,7 +211,7 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/btGravarPedido"
+            android:id="@+id/btSalvarPedido"
             android:layout_width="219dp"
             android:layout_height="36dp"
             android:text="Salvar"
@@ -227,7 +219,7 @@
             android:layout_weight="0.07"
             android:background="#ffa602"
             style="@style/Base.DialogWindowTitle.AppCompat"
-            android:onClick="btGravar"/>
+            android:onClick="btSalvarPedido"/>
 
     </LinearLayout>
 </LinearLayout>
