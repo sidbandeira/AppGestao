@@ -21,54 +21,57 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.classeProduto.Produto;
 import com.example.sidnei.appgestao.pedidoCompra.Adaptadores.AdapterItemCompra;
+import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompra;
 import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompraItem;
+import com.example.sidnei.appgestao.pedidoCompra.Repositorio.PedidoCompraItemRepositorio;
+import com.example.sidnei.appgestao.pedidoCompra.Repositorio.PedidoCompraRepositorio;
+import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocioListFragment;
 import com.example.sidnei.appgestao.utilitario.JSON;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PedidoCompraItemActivity extends AppCompatActivity {
-    JSONObject jsonobject;
-    JSONArray jsonarray;
-    ArrayList<String> itemlist;
-    ArrayList<Produto> item;
-    ArrayList<String> itemlistpedido;
-    ArrayList<PedidoCompraItem> itempedido;
+    private JSONObject jsonobject;
+    private JSONArray jsonarray;
+    private ArrayList<String> itemlist;
+    private ArrayList<Produto> item;
+    private ArrayList<String> itemlistpedido;
+    private ArrayList<PedidoCompraItem> itempedido;
     private ArrayList<PedidoCompraItem> itens = new ArrayList<PedidoCompraItem>();
-    ArrayList<String> listaprodutos = new ArrayList<String>();
+    private ArrayList<String> listaprodutos = new ArrayList<String>();
     private EditText edtCusto;
     private EditText edtQtde;
     private TextView txtSubTotalPedido;
     private TextView txtTotalItem;
     private Spinner spnProduto2;
     private Button btAdicionar;
-    private Button btGravarPedido;
+    private Button btSalvarPedido;
     private ListView listagem;
 
     //VARIAVEIS COM AS INFORMAÇOES DO PEDIDOCOMPRA
-    Integer codfornecedor;
-    String descricaofornecedor;
-    String datapedido;
-    String formapgto;
+    private Integer codfornecedor;
+    private String descricaofornecedor;
+    private String datapedido;
+    private String formapgto;
 
     //VARIAVEIS PARA CALCULAR OS VALORES DO PRODUTO SELECIONADO
-    Double custo = 0.00;
-    Double qtde = 0.00;
-    Double total = 0.00;
-    String descricaoProduto = "";
-    String resultado = "";
-    Double subtotalItem = 0.00;
-    Double subtotalPedido = 0.00;
+    private Integer codItem = 0;
+    private Double custo = 0.00;
+    private Double qtde = 0.00;
+    private Double total = 0.00;
+    private String descricaoProduto = "";
+    private String resultado = "";
+    private Double subtotalItem = 0.00;
+    private Double subtotalPedido = 0.00;
 
     private AdapterItemCompra adapter;
-    // FORMATA O VALOR DOUBLE COM TRES DECIMAIS
-    DecimalFormat formato = new DecimalFormat("#.###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
 
         // RECUPERA O BUTTON ACICIONAR DECLARADO NO XML
         Button btAdicionar = (Button) findViewById(R.id.btAdicionar);
+        Button btSalvarPedido = (Button) findViewById(R.id.btSalvarPedido);
 
         //CRIA O ADAPTER
         adapter = new AdapterItemCompra(this, itens);
@@ -102,7 +106,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         listagem.setAdapter(adapter);
         listagem.setCacheColorHint(Color.TRANSPARENT);
 
-        // Download DO ARQUIVO JSON DE FORMA ASSINCRONA
+        // DOWNLOAD DO ARQUIVO JSON DE FORMA ASSINCRONA
         new DownloadJSON().execute();
 
         //METODO PARA ATUALIZAR O TOTAL QUANDO SETAR OU PERDER O FOCO DO CAMPO QUANTIDADE.
@@ -129,21 +133,23 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         // RESPONSAVEL POR EXECUTAR A AÇÃO DO CLIQUE DO BOTÃO ADICIONAR
         btAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                //VERIFICA SE FOI SELECIONADO ALGUM PRODUTO
                 if(descricaoProduto.contains("Selecione")) {
                     Toast.makeText(PedidoCompraItemActivity.this,"Selecione um produto!",Toast.LENGTH_SHORT).show();
                 }else{
+                    String[] partes = descricaoProduto.split("-");
+                    codItem = Integer.parseInt(partes[0]);
                     custo = Double.parseDouble(edtCusto.getText().toString());
                     qtde = Double.parseDouble(edtQtde.getText().toString());
                     total = custo * qtde;
                     resultado = String.format("%.3f", total);
                     resultado = resultado.replace(",", ".");
-
-                    //txtTotalItem.setText(resultado);
-
                     subtotalPedido += total;
+                    //FORMATA VALOR PARA 3 DECIMAIS
                     String tot = String.format("%.3f",subtotalPedido);
                     txtSubTotalPedido.setText(tot);
+
+                    //
                     PedidoCompraItem item = new PedidoCompraItem();
                     item.setDescricaoItem(descricaoProduto);
                     item.setPrecoCusto(custo);
@@ -201,11 +207,50 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
+
     }
 
     protected void onCreateView(LayoutInflater inflater, ViewGroup container,
                                 Bundle savedInstanceState){
         View ListView = inflater.inflate(R.layout.item_listagem_pedido, null);
+    }
+
+    public void btSalvarPedido(View view) {
+        //Grava o Pedido
+        PedidoCompraRepositorio pedRep = new PedidoCompraRepositorio(this);
+        PedidoCompra pedido = new PedidoCompra();
+        pedido.codEmpresa = MainActivity.codEmpresa;
+        pedido.codUnNegocio = UnidadeNegocioListFragment.codUnidade;
+        pedido.idFornecedor = codfornecedor;
+        pedido.dtPedido = datapedido;
+        pedido.formapgto = formapgto;
+        pedido.totalPedido = subtotalPedido;
+        pedRep.salvar(pedido);
+
+        if (pedido.get_id() > 0){
+            //GRAVAR OS ITENS DO PEDIDO
+            for (int i = 0; i < itens.size(); i++) {
+                PedidoCompraItemRepositorio itemRep = new PedidoCompraItemRepositorio(this);
+                PedidoCompraItem pedItem = new PedidoCompraItem();
+
+                pedItem.idCompra = pedido.get_id();
+                pedItem.descricaoItem = itens.get(i).descricaoItem;
+                pedItem.idItem = itens.get(i).idItem;
+                pedItem.qtdeItem = itens.get(i).qtdeItem;
+                pedItem.precoCusto = itens.get(i).precoCusto;
+                pedItem.totalItem = itens.get(i).totalItem;
+
+                itemRep.salvar(pedItem);
+            }
+
+        }
+
+        limpaTela();
+        Toast.makeText(this,"Pedido salvo com sucesso!",Toast.LENGTH_LONG).show();
+
+        // PROGRAMAR A VOLTA PARA A TELA INICIAL DO PEDIDO
+
     }
 
     // METODO QUE FAZ O DOWNLOAD DO ARQUIVO JSON
