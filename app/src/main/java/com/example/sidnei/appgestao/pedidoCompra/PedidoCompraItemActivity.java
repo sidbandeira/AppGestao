@@ -153,9 +153,9 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     String tot = String.format("%.3f",subtotalPedido);
                     txtSubTotalPedido.setText(tot);
 
-                    //
                     PedidoCompraItem item = new PedidoCompraItem();
                     item.setDescricaoItem(descricaoProduto);
+                    item.setIdItem(codItem);
                     item.setPrecoCusto(custo);
                     item.setQtdeItem(qtde);
                     item.setTotalItem(Double.parseDouble(resultado));
