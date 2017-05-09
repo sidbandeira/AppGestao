@@ -21,9 +21,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sidnei.appgestao.Classes.Produto;
 import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.classeProduto.Produto;
 import com.example.sidnei.appgestao.pedidoCompra.Adaptadores.AdapterItemCompra;
 import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompra;
 import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompraItem;

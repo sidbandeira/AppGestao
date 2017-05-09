@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.classeProduto;
+package com.example.sidnei.appgestao.Classes;
 
 public class Produto {
     public int _id;

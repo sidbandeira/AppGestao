@@ -29,7 +29,6 @@
         <activity android:name=".menu.MenuActivity" android:label="Menu" android:screenOrientation="portrait"/>
         <activity android:name=".unidadeNegocio.SelecaoUnidadeActivity" android:label="Unidades de Negócio" android:screenOrientation="portrait"/>
         <activity android:name=".pedidoCompra.PedidoCompraActivity" android:label="Pedido de Compra" android:screenOrientation="portrait"/>
-        <activity android:name=".classeProduto.PedidoItemActivity" android:label="Seleção de Produtos" android:screenOrientation="portrait"/>
         <activity android:name=".pedidoCompra.PedidoCompraItemActivity" android:label="Seleção" android:screenOrientation="portrait"></activity>
     </application>
 

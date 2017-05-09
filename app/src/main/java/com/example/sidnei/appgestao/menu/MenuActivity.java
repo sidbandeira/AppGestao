@@ -12,7 +12,6 @@ import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.PostosActivity;
 import com.example.sidnei.appgestao.ProdutosActivity;
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.classeProduto.PedidoItemActivity;
 import com.example.sidnei.appgestao.pedidoCompra.PedidoCompraActivity;
 
 import java.util.ArrayList;
@@ -87,8 +86,8 @@ public class MenuActivity extends AppCompatActivity implements AdapterView.OnIte
                     startActivity(it);
                 break;
             case "Vendas":
-                    Intent it1 = new Intent(this, PedidoItemActivity.class);
-                    startActivity(it1);
+                    //Intent it1 = new Intent(this, PedidoItemActivity.class);
+                    //startActivity(it1);
                 break;
             case "Caixa":
                     Intent it2 = new Intent(this, FechamentoCaixaActivity.class);
