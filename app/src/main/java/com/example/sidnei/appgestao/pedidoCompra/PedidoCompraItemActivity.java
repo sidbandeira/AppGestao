@@ -74,11 +74,13 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     private Double subtotalPedido = 0.00;
 
     private AdapterItemCompra adapter;
+    private String gravouItens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_compra_item);
+        gravouItens = "false";
         final TextView txtSubTotalPedido = (TextView) findViewById(R.id.txtSubTotalPedido);
         final TextView txtTotalItem = (TextView) findViewById(R.id.txtTotalItem);
         final EditText edtCusto = (EditText) findViewById(R.id.edtCusto);
@@ -90,7 +92,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         descricaofornecedor = itPedidoCompra.getStringExtra("descricaofornecedor");
         email = itPedidoCompra.getStringExtra("email");
         datapedido = itPedidoCompra.getStringExtra("datapedido");
-        dataentrega = itPedidoCompra.getStringExtra("dataprevisao");
+        dataentrega = itPedidoCompra.getStringExtra("dataentrega");
         formapgto = itPedidoCompra.getStringExtra("formapgto");
 
         //COMANDO PARA SUPRIMIR O TECLADO AO ABRIR A TELA
@@ -190,7 +192,6 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                                 subtotalPedido -= itens.get(position).getTotalItem();
                                 result = String.format("%.3f", subtotalPedido);
                                 result = result.replace(",", ".");
-
                                 itens.remove(position);
                                 adapter.notifyDataSetChanged();
 
@@ -221,42 +222,55 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
     }
 
     public void btSalvarPedido(View view) {
-        //Grava o Pedido
-        PedidoCompraRepositorio pedRep = new PedidoCompraRepositorio(this);
-        PedidoCompra pedido = new PedidoCompra();
-        pedido.codEmpresa = MainActivity.codEmpresa;
-        pedido.codUnNegocio = UnidadeNegocioListFragment.codUnidade;
-        pedido.idFornecedor = codfornecedor;
-        pedido.email = email;
-        pedido.dtPedido = datapedido;
-        pedido.dtEntrega = dataentrega;
-        pedido.formapgto = formapgto;
-        pedido.totalPedido = subtotalPedido;
-        pedRep.salvar(pedido);
+        //VERIFICA SE FOI ADICIONADO ALGUM ITEM A LISTAGEM
+        if(itens.size()> 0) {
+            //GRAVA TABELA PEDIDO
+            PedidoCompraRepositorio pedRep = new PedidoCompraRepositorio(this);
+            PedidoCompra pedido = new PedidoCompra();
+            pedido.codEmpresa = MainActivity.codEmpresa;
+            pedido.codUnNegocio = UnidadeNegocioListFragment.codUnidade;
+            pedido.idFornecedor = codfornecedor;
+            pedido.email = email;
+            pedido.dtPedido = datapedido;
+            pedido.dtEntrega = dataentrega;
+            pedido.formapgto = formapgto;
+            String tot = "";
+            tot = String.format("%.3f", subtotalPedido);
+            tot = tot.replace(",", ".");
+            pedido.totalPedido = Double.parseDouble(tot);
+            pedRep.salvar(pedido);
 
-        if (pedido.get_id() > 0){
-            //GRAVAR OS ITENS DO PEDIDO
-            for (int i = 0; i < itens.size(); i++) {
-                PedidoCompraItemRepositorio itemRep = new PedidoCompraItemRepositorio(this);
-                PedidoCompraItem pedItem = new PedidoCompraItem();
+            if (pedido.get_id() > 0) {
+                //GRAVAR OS ITENS DO PEDIDO
+                for (int i = 0; i < itens.size(); i++) {
+                    PedidoCompraItemRepositorio itemRep = new PedidoCompraItemRepositorio(this);
+                    PedidoCompraItem pedItem = new PedidoCompraItem();
 
-                pedItem.idCompra = pedido.get_id();
-                pedItem.descricaoItem = itens.get(i).descricaoItem;
-                pedItem.idItem = itens.get(i).idItem;
-                pedItem.qtdeItem = itens.get(i).qtdeItem;
-                pedItem.precoCusto = itens.get(i).precoCusto;
-                pedItem.totalItem = itens.get(i).totalItem;
+                    pedItem.idCompra = pedido.get_id();
+                    pedItem.descricaoItem = itens.get(i).descricaoItem;
+                    pedItem.idItem = itens.get(i).idItem;
+                    pedItem.qtdeItem = itens.get(i).qtdeItem;
+                    pedItem.precoCusto = itens.get(i).precoCusto;
+                    pedItem.totalItem = itens.get(i).totalItem;
 
-                itemRep.salvar(pedItem);
+                    itemRep.salvar(pedItem);
+                }
             }
-
+            limpaTela();
+            gravouItens = "true";
+            Toast.makeText(this,"Pedido salvo com sucesso!",Toast.LENGTH_LONG).show();
+            onBackPressed();
+        }else{
+            Toast.makeText(this,"Não foi adicionado itens ao pedido!",Toast.LENGTH_LONG).show();
         }
+    }
 
-        limpaTela();
-        Toast.makeText(this,"Pedido salvo com sucesso!",Toast.LENGTH_LONG).show();
-
-        // PROGRAMAR A VOLTA PARA A TELA INICIAL DO PEDIDO
-
+    @Override
+    public void onBackPressed() {
+        Intent it = new Intent();
+        it.putExtra("PARAM_ACTIVITY2",gravouItens);
+        setResult(1, it);
+        super.onBackPressed();
     }
 
     // METODO QUE FAZ O DOWNLOAD DO ARQUIVO JSON
@@ -365,6 +379,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
         edtCusto.setText("0.00");
         edtQtde.setText("1.00");
         txtTotalItem.setText("0.00");
+        //txtSubTotalPedido.setText("0.00");
         subtotalItem = 0.00;
     }
 }
