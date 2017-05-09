@@ -1,9 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="com.example.sidnei.appgestao.classeProduto.ProdutoListFragment">
+    tools:context="com.example.sidnei.appgestao.estoque.ProdListFragment">
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
@@ -26,4 +27,4 @@
         android:id="@+id/list"
         android:layout_below="@+id/progressBar"/>
 
-</LinearLayout>
+</RelativeLayout>

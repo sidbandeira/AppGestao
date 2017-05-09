@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--LINEAR DA DESCRICAO DO PRODUTO-->
+    <LinearLayout
+        android:id="@+id/linearDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="cod"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=" - "
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+        <TextView
+            android:id="@+id/txtDescricaoProd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="4dp"
+            android:text="DESCRICAO DO PRODUTO"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    </LinearLayout>
+
+    <!--LINEAR DO PREÇO DE CUSTO-->
+    <LinearLayout
+        android:id="@+id/linearPrecoCusto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearDescricao"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço Custo R$:"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/txtCustoProd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:textSize="15dp"
+            android:layout_weight="9"
+            android:text="@null"/>
+    </LinearLayout>
+
+    <!--LINEAR DO PREÇO DE VENDA-->
+    <LinearLayout
+        android:id="@+id/linearPrecoVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearPrecoCusto"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço Venda R$:"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtVendaProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:textSize="15dp"
+            android:text="@null"/>
+    </LinearLayout>
+
+    <!--LINEAR ULTIMA COMPRA-->
+    <LinearLayout
+        android:id="@+id/linearAtualizacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearPrecoVenda"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Última Compra: "
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtUltimaCompra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:textSize="15dp"
+            android:text="01/09/2016"/>
+    </LinearLayout>
+
+</RelativeLayout>

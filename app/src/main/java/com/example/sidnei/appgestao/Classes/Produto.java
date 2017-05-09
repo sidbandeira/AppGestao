@@ -5,14 +5,18 @@ public class Produto {
     public String produtoDescricao;
     public Double produtoPrecoVenda;
     public Double produtoPrecoCusto;
-    public String nomeSpinner;
 
-    //    public Produto(int _id, String produtoDescricao, Double produtoPrecovenda,Double produtoPrecoCusto){
-//        this._id = _id;
-//        this.produtoDescricao = produtoDescricao;
-//        this.produtoPrecovenda = produtoPrecovenda;
-//        this.produtoPrecoCusto = produtoPrecoCusto;
-//    }
+
+    public Produto(int _id, String produtoDescricao, Double produtoPrecovenda,Double produtoPrecoCusto){
+        this._id = _id;
+        this.produtoDescricao = produtoDescricao;
+        this.produtoPrecoVenda = produtoPrecovenda;
+        this.produtoPrecoCusto = produtoPrecoCusto;
+    }
+
+    public Produto(){
+
+    }
 
     public long get_id(){
         return _id;

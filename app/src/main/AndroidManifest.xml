@@ -25,7 +25,7 @@
         <activity android:name=".VendasActivity" android:label="Resumo de Vendas" android:screenOrientation="portrait"/>
         <activity android:name=".PostosActivity" android:label="Controle de Tanques " android:screenOrientation="portrait"/>
         <activity android:name=".FechamentoCaixaActivity" android:label="Fechamento de Caixa" android:screenOrientation="portrait"/>
-        <activity android:name=".ProdutosActivity" android:label="Listagem de Produtos" android:screenOrientation="portrait"/>
+        <activity android:name=".estoque.ProdutosActivity" android:label="Listagem de Produtos" android:screenOrientation="portrait"/>
         <activity android:name=".menu.MenuActivity" android:label="Menu" android:screenOrientation="portrait"/>
         <activity android:name=".unidadeNegocio.SelecaoUnidadeActivity" android:label="Unidades de Negócio" android:screenOrientation="portrait"/>
         <activity android:name=".pedidoCompra.PedidoCompraActivity" android:label="Pedido de Compra" android:screenOrientation="portrait"/>

@@ -7,13 +7,12 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".ProdutosActivity">
+    tools:context=".estoque.ProdutosActivity">
 
-    <TextView
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:text="Produtos"/>
+        android:name="com.example.sidnei.appgestao.estoque.ProdListFragment"
+        android:id="@+id/listFragment"/>
 
 </RelativeLayout>
