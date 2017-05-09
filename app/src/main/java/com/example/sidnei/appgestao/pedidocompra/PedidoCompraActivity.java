@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.pedidoCompra.Classes.Fornecedor;
 import com.example.sidnei.appgestao.utilitario.JSON;
@@ -32,7 +33,8 @@ public class PedidoCompraActivity extends AppCompatActivity {
     public static String datapedido = "";
     public static String dataentrega = "";
     public static String formapgto = "";
-    public static Spinner spnFornecedor;
+
+    private String dataFormatada;
 
     JSONObject jsonobject;
     JSONArray jsonarray;
@@ -50,17 +52,17 @@ public class PedidoCompraActivity extends AppCompatActivity {
         //FORMATA E SETA A DATA DO DIA
         long date = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dateString = sdf.format(date);
+        dataFormatada = sdf.format(date);
 
         edtEmail = (EditText) findViewById(R.id.edtEmail);
 
         edtData = (EditText) findViewById(R.id.edtData);
         edtData.addTextChangedListener(Mascara.insert(Mascara.MaskType.DATA,  edtData));
-        edtData.setText(dateString);
+        edtData.setText(dataFormatada);
 
         edtDataEntrega = (EditText) findViewById(R.id.edtDataEntrega);
         edtDataEntrega.addTextChangedListener(Mascara.insert(Mascara.MaskType.DATA,  edtDataEntrega));
-        edtDataEntrega.setText(dateString);
+        edtDataEntrega.setText(dataFormatada);
 
         btnProdutos = (Button) findViewById(R.id.btnProdutos);
 
@@ -71,25 +73,35 @@ public class PedidoCompraActivity extends AppCompatActivity {
         email = edtEmail.getText().toString();
         dataentrega = edtDataEntrega.getText().toString();
 
+        //VALIDA FORNECEDOR
         if(descricaofornecedor.toString().contains("Selecione") || descricaofornecedor.toString().equals("")){
             Toast.makeText(this,"Selecione um fornecedor!",Toast.LENGTH_LONG).show();
         }else{
-            if(Validacoes.validaData(edtData.getText().toString(),"dd/MM/yy") == false){
-                Toast.makeText(this,"Informe uma data de pedido válida!",Toast.LENGTH_LONG).show();
-                edtData.requestFocus();
-            }else{
-                if(Validacoes.validaData(edtDataEntrega.getText().toString(),"dd/MM/yy") == false) {
-                    Toast.makeText(this, "Informe uma data de entrega válida!", Toast.LENGTH_LONG).show();
-                    edtDataEntrega.requestFocus();
-                }else {
-                    Intent it = new Intent(this, PedidoCompraItemActivity.class);
-                    it.putExtra("codfornecedor", codFornecedor.toString());
-                    it.putExtra("descricaofornecedor", descricaofornecedor);
-                    it.putExtra("email", email);
-                    it.putExtra("datapedido", datapedido);
-                    it.putExtra("dataentrega", dataentrega);
-                    it.putExtra("formapgto", formapgto);
-                    startActivityForResult(it, 1);
+            //VALIDA EMAIL FORNECEDOR
+            if(email.isEmpty()){
+                Toast.makeText(this,"Informe o e-mail do fornecedor!",Toast.LENGTH_LONG).show();
+                edtEmail.requestFocus();
+            }else {
+                //VALIDA DATA DE EMISSAO DO PEDIDO
+                if (Validacoes.validaData(edtData.getText().toString(), "dd/MM/yy") == false) {
+                    Toast.makeText(this, "Informe uma data de pedido válida!", Toast.LENGTH_LONG).show();
+                    edtData.requestFocus();
+                } else {
+                    //VALIDA DATA DE ENTREGA DO PEDIDO
+                    if (Validacoes.validaData(edtDataEntrega.getText().toString(), "dd/MM/yy") == false) {
+                        Toast.makeText(this, "Informe uma data de entrega válida!", Toast.LENGTH_LONG).show();
+                        edtDataEntrega.requestFocus();
+                    } else {
+                        //PASSA OS VALORES DA TELA DE PEDIDO PARA A TELA DE ITENS DO PEDIDO
+                        Intent it = new Intent(this, PedidoCompraItemActivity.class);
+                        it.putExtra("codfornecedor", codFornecedor.toString());
+                        it.putExtra("descricaofornecedor", descricaofornecedor);
+                        it.putExtra("email", email);
+                        it.putExtra("datapedido", datapedido);
+                        it.putExtra("dataentrega", dataentrega);
+                        it.putExtra("formapgto", formapgto);
+                        startActivityForResult(it, 1);
+                    }
                 }
             }
         }
@@ -97,10 +109,17 @@ public class PedidoCompraActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == 1){
-            //VER O QUE FAZER  QUANDO RETORNAR DA TELA DOS ITENS PARA A TELA DO LANCAMENTO DO PEDIDO
-            Toast.makeText(this,"ok",Toast.LENGTH_LONG).show();
+        String retorno = "";
+        switch (requestCode) {
+            case 1:
+                retorno = data.getExtras().getString("PARAM_ACTIVITY2");
+
+                if(retorno.equals("true")){
+                    limpaTela();
+                }
+                break;
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     // Download JSON file AsyncTask
@@ -114,7 +133,7 @@ public class PedidoCompraActivity extends AppCompatActivity {
             fornecedorlist = new ArrayList<String>();
 
             // CHAMA A CLASSE JSON E PASSA A URL PARA BAIXAR O ARQUIVO COM OS FORNECEDORES NO FORMATO JSON
-            jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/ws/FornecedorWs.php?codempresa=3");
+            jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/ws/FornecedorWs.php?codempresa="+ MainActivity.codEmpresa);
             try {
                 // ADICIONA UM ITEM NA LISTA DE PRODUTOS PARA SERVIR DE HINT DO SPINNER
                 Fornecedor for0 = new Fornecedor();
@@ -174,7 +193,7 @@ public class PedidoCompraActivity extends AppCompatActivity {
             });
 
             //SPINNER PARA LISTAR AS FORMAS DE PAGAMENTO DO PEDIDO
-            Spinner spnFormaPgto = (Spinner) findViewById(R.id.spnFormaPgto);
+            final Spinner spnFormaPgto = (Spinner) findViewById(R.id.spnFormaPgto);
             ArrayAdapter adapter = ArrayAdapter.createFromResource( PedidoCompraActivity.this, R.array.formapagamento , android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spnFormaPgto.setAdapter(adapter);
@@ -193,5 +212,29 @@ public class PedidoCompraActivity extends AppCompatActivity {
             });
             datapedido = edtData.getText().toString();
         }
+    }
+
+    // METODO RESPONSAVEL POR LIMPAR OS DADOS DA TELA.
+    public void limpaTela(){
+        descricaofornecedor = "";
+        email = "";
+        dataentrega = "";
+        datapedido = "";
+        formapgto = "";
+        codFornecedor = 0;
+
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtData = (EditText) findViewById(R.id.edtData);
+        edtData.addTextChangedListener(Mascara.insert(Mascara.MaskType.DATA,  edtData));
+        edtData.setText(dataFormatada);
+        edtDataEntrega = (EditText) findViewById(R.id.edtDataEntrega);
+        edtDataEntrega.addTextChangedListener(Mascara.insert(Mascara.MaskType.DATA,  edtDataEntrega));
+        edtDataEntrega.setText(dataFormatada);
+        edtEmail.setText("");
+
+        final Spinner spnFormaPgto = (Spinner) findViewById(R.id.spnFormaPgto);
+        final Spinner spnFornecedor = (Spinner) findViewById(R.id.spnFornecedor);
+        spnFornecedor.setSelection(0);
+        spnFormaPgto.setSelection(0);
     }
 }
