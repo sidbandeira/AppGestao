@@ -5,15 +5,19 @@ public class Produto {
     public String produtoDescricao;
     public Double produtoPrecoVenda;
     public Double produtoPrecoCusto;
+    public String produtodtultimacompra;
 
-
-    public Produto(int _id, String produtoDescricao, Double produtoPrecovenda,Double produtoPrecoCusto){
+    //CONSTRUTOR COM PARAMETROS
+    public Produto(int _id, String produtoDescricao, Double produtoPrecovenda,Double produtoPrecoCusto,
+                   String produtodtultimacompra){
         this._id = _id;
         this.produtoDescricao = produtoDescricao;
         this.produtoPrecoVenda = produtoPrecovenda;
         this.produtoPrecoCusto = produtoPrecoCusto;
+        this.produtodtultimacompra = produtodtultimacompra;
     }
 
+    //CONSTRUTOR VAZIO
     public Produto(){
 
     }
@@ -48,6 +52,14 @@ public class Produto {
 
     public void setProdutoPrecoCusto(Double produtoPrecoCusto){
         this.produtoPrecoCusto = produtoPrecoCusto;
+    }
+
+    public String getProdutodtultimacompra() {
+        return produtodtultimacompra;
+    }
+
+    public void setProdutodtultimacompra(String produtodtultimacompra) {
+        this.produtodtultimacompra = produtodtultimacompra;
     }
 
     public String toString(){
