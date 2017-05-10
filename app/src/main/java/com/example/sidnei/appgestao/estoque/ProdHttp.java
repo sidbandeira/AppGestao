@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdHttp {
-    public static final String PRODUTO_URL_JSON = "http://sgestao.hol.es/Json/ProdutoWS.json";
-    //public static final String PRODUTO_URL_JSON = "http://sgestao.hol.es/ws/UnNegocioWs.php?codempresa=";
+    //public static final String PRODUTO_URL_JSON = "http://sgestao.hol.es/Json/ProdutoWS.json";
+    public static final String PRODUTO_URL_JSON = "http://sgestao.hol.es/ws/ProdutoWs.php?codempresa=";
 
     private static HttpURLConnection connectar(String urlArquivo) throws IOException {
         final int SEGUNDOS = 1000;
@@ -47,8 +47,8 @@ public class ProdHttp {
     public static List<Produto> carregarProdutoJson(Integer empresa) {
         try {
 
-            //HttpURLConnection conexao = connectar(PRODUTO_URL_JSON + empresa);
-            HttpURLConnection conexao = connectar(PRODUTO_URL_JSON);
+            HttpURLConnection conexao = connectar(PRODUTO_URL_JSON + empresa);
+            //HttpURLConnection conexao = connectar(PRODUTO_URL_JSON);
             int resposta = conexao.getResponseCode();
             if (resposta == HttpURLConnection.HTTP_OK) {
                 InputStream is = conexao.getInputStream();
@@ -71,7 +71,8 @@ public class ProdHttp {
                     jsonProduto.getInt("idproduto"),
                     jsonProduto.getString("produtodescricao"),
                     jsonProduto.getDouble("produtoprecovenda"),
-                    jsonProduto.getDouble("produtoprecocusto")
+                    jsonProduto.getDouble("produtoprecocusto"),
+                    jsonProduto.getString("produtodtultimacompra")
             );
             listadeProduto.add(prod);
         }

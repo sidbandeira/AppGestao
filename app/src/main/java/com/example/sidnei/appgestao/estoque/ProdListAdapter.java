@@ -28,6 +28,7 @@ public class ProdListAdapter extends ArrayAdapter<Produto> {
             holder.txtDescricaoProd =  (TextView)convertView.findViewById(R.id.txtDescricaoProd);
             holder.txtVendaProduto =  (TextView)convertView.findViewById(R.id.txtVendaProduto);
             holder.txtCustoProd =  (TextView)convertView.findViewById(R.id.txtCustoProd);
+            holder.txtUltimaCompra =  (TextView)convertView.findViewById(R.id.txtUltimaCompra);
 
             convertView.setTag(holder);
         } else {
@@ -37,6 +38,7 @@ public class ProdListAdapter extends ArrayAdapter<Produto> {
         holder.txtDescricaoProd.setText(produto.produtoDescricao);
         holder.txtVendaProduto.setText(produto.produtoPrecoVenda.toString());
         holder.txtCustoProd.setText(produto.produtoPrecoCusto.toString());
+        holder.txtUltimaCompra.setText(produto.produtodtultimacompra);
 
         return convertView;
     }
@@ -46,6 +48,7 @@ public class ProdListAdapter extends ArrayAdapter<Produto> {
         TextView txtDescricaoProd;
         TextView txtVendaProduto;
         TextView txtCustoProd;
+        TextView txtUltimaCompra;
 
     }
 }
