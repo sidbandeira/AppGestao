@@ -126,12 +126,14 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                     resultado = String.format("%.3f", total);
                     resultado = resultado.replace(",", ".");
                     txtTotalItem.setText(resultado);
+                    total = 0.00;
                 }else {       //LOST FOCUS
                     qtde = Double.parseDouble(edtQtde.getText().toString());
                     total = custo * qtde;
                     resultado = String.format("%.3f", total);
                     resultado = resultado.replace(",", ".");
                     txtTotalItem.setText(resultado);
+                    total = 0.00;
                 }
             }
         });
@@ -284,8 +286,8 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             itemlist = new ArrayList<String>();
 
             // CHAMA A CLASSE JSON E PASSA A URL PARA BAIXAR O ARQUIVO COM OS PRODUTOS NO FORMATO JSON
-            //jsonobject = JSON.getJSONfromURL("http://10.0.2.2:81/ws_sgestao/Json/ProdutoWS.json");
-            jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/Json/ProdutoWS.json");
+            jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/ws/ProdutoWs.php?codempresa=" + MainActivity.codEmpresa);
+            //jsonobject = JSON.getJSONfromURL("http://sgestao.hol.es/Json/ProdutoWS.json");
             try {
                 // ADICIONA UM ITEM NA LISTA DE PRODUTOS PARA SERVIR DE HINT DO SPINNER
                 Produto prod0 = new Produto();
@@ -356,6 +358,8 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
                         edtCusto.setText(custo.toString());
                         edtQtde.setText(qtde.toString());
                         txtTotalItem.setText(subtotalItem.toString());
+                        subtotalItem = 0.00;
+
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> arg0) {
