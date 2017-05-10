@@ -107,7 +107,7 @@
             android:layout_weight="1"
             android:background="@drawable/borda_preta"
             android:padding="2dp"
-            android:text="ssds"
+            android:text="0.00"
             android:textAlignment="viewEnd"
             android:textSize="20dp" />
     </LinearLayout>
