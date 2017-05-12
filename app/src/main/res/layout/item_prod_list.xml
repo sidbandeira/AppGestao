@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -37,76 +36,96 @@
 
     </LinearLayout>
 
-    <!--LINEAR DO PREÇO DE CUSTO-->
-    <LinearLayout
-        android:id="@+id/linearPrecoCusto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+    <!--IMAGEM DO PRODUTO-->
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_below="@+id/linearDescricao"
-        android:layout_marginLeft="4dp">
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/ic_launcher"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preço Custo R$:"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/txtCustoProd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:textSize="15dp"
-            android:layout_weight="9"
-            android:text="@null"/>
-    </LinearLayout>
-
-    <!--LINEAR DO PREÇO DE VENDA-->
-    <LinearLayout
-        android:id="@+id/linearPrecoVenda"
+    <!--LINHA PRECO CUSTO-->
+    <TextView
+        android:id="@+id/txtCusto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linearPrecoCusto"
-        android:layout_marginLeft="4dp">
+        android:layout_marginLeft="4dp"
+        android:text="Preco custo ..R$: "
+        android:layout_below="@+id/linearDescricao"
+        android:layout_toEndOf="@+id/imgFoto" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preço Venda R$:"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/txtVendaProduto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:textSize="15dp"
-            android:text="@null"/>
-    </LinearLayout>
-
-    <!--LINEAR ULTIMA COMPRA-->
-    <LinearLayout
-        android:id="@+id/linearAtualizacao"
+    <TextView
+        android:id="@+id/txtCustoProd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linearPrecoVenda"
-        android:layout_marginLeft="4dp">
+        android:text="0.00"
+        android:layout_toEndOf="@+id/txtCusto"
+        android:layout_alignBaseline="@+id/txtCusto"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Última Compra: "
-            android:layout_weight="1"/>
+    <!--LINHA PRECO VENDA-->
+    <TextView
+        android:id="@+id/txtVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtCusto"
+        android:layout_toEndOf="@+id/imgFoto"
+        android:layout_marginLeft="4dp"
+        android:text="Preço Venda .R$: "/>
 
-        <TextView
-            android:id="@+id/txtUltimaCompra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:textSize="15dp"
-            android:text="01/09/2016"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtVendaProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:layout_toEndOf="@+id/txtCusto"
+        android:layout_alignBaseline="@+id/txtVenda"/>
+
+    <!--LINHA ULTIMA COMPRA-->
+    <TextView
+        android:id="@+id/txtDataCompra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtVenda"
+        android:layout_toEndOf="@+id/imgFoto"
+        android:layout_marginLeft="4dp"
+        android:text="Última Compra: "/>
+
+    <TextView
+        android:id="@+id/txtUltimaCompra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01/01/1900"
+        android:layout_toEndOf="@+id/txtDataCompra"
+        android:layout_alignBaseline="@+id/txtDataCompra"/>
+
+    <!--LINHA ESTOQUE-->
+
+    <TextView
+        android:id="@+id/txtCodBarras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDataCompra"
+        android:layout_toEndOf="@+id/imgFoto"
+        android:layout_marginLeft="4dp"
+        android:text="7891234567890"/>
+
+    <TextView
+        android:id="@+id/txtEstoque"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@+id/txtCodBarras"
+        android:layout_alignBaseline="@+id/txtCodBarras"
+        android:text="  Saldo: "/>
+
+    <TextView
+        android:id="@+id/txtSaldo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:layout_toEndOf="@+id/txtEstoque"
+        android:layout_alignBaseline="@+id/txtEstoque"/>
+
 
 </RelativeLayout>
