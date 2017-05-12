@@ -260,10 +260,10 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             }
             limpaTela();
             gravouItens = "true";
-            Toast.makeText(this,"Pedido salvo com sucesso!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Pedido salvo com sucesso!",Toast.LENGTH_SHORT).show();
             onBackPressed();
         }else{
-            Toast.makeText(this,"Não foi adicionado itens ao pedido!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Não foi adicionado itens ao pedido!",Toast.LENGTH_SHORT).show();
         }
     }
 
