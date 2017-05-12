@@ -126,11 +126,12 @@
     <ImageView
 
         android:id="@+id/imgImagem"
-        android:layout_width="500dp"
-        android:layout_height="320dp"
-        android:layout_below="@+id/linearSaldo"
-        android:layout_marginTop="15dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btVoltar"
@@ -140,7 +141,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.07"
         android:background="#ffa602"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         style="@style/Base.DialogWindowTitle.AppCompat"
         android:onClick="btVoltar"
         android:layout_below="@+id/imgImagem"
