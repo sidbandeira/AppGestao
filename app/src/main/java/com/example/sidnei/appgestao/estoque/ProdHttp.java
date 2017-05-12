@@ -69,11 +69,12 @@ public class ProdHttp {
             JSONObject jsonProduto = jsonProd.getJSONObject(i);
             Produto prod = new Produto(
                     jsonProduto.getInt("idproduto"),
+                    jsonProduto.getString("produtocodbarras"),
                     jsonProduto.getString("produtodescricao"),
                     jsonProduto.getDouble("produtoprecovenda"),
                     jsonProduto.getDouble("produtoprecocusto"),
-                    jsonProduto.getString("produtodtultimacompra")
-            );
+                    jsonProduto.getString("produtodtultimacompra"),
+                    jsonProduto.getDouble("produtosaldo"));
             listadeProduto.add(prod);
         }
         return listadeProduto;
