@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_padrao"
+    tools:context="com.example.sidnei.appgestao.estoque.ProdDetalheActivity">
+
+    <LinearLayout
+        android:id="@+id/linearDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtDescricaoProd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="4dp"
+            android:text="DESCRICAO DO PRODUTO"
+            android:textColor="#ffa602"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearBarras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearDescricao"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/txtBarra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="Código Barras: "/>
+
+        <TextView
+            android:id="@+id/txtCodBarras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescAcesso"
+            android:textColor="#ffa602"
+            android:text="7891234567890"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearCusto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearBarras"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/txtCusto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="Preço Custo ..R$: "/>
+
+        <TextView
+            android:id="@+id/txtPrecoCusto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="0.00"/>
+    </LinearLayout>
+
+    <LinearLayout
+    android:id="@+id/linearVenda"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_below="@+id/linearCusto"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:id="@+id/txtVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffa602"
+        android:text="Preço Venda .R$: "/>
+
+    <TextView
+        android:id="@+id/txtPrecoVenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDescAcesso"
+        android:textColor="#ffa602"
+        android:text="0.00"/>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearSaldo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearVenda"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/txtSal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="Saldo : "/>
+
+        <TextView
+            android:id="@+id/txtSaldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:text="0.00"/>
+
+    </LinearLayout>
+
+    <ImageView
+
+        android:id="@+id/imgImagem"
+        android:layout_width="500dp"
+        android:layout_height="320dp"
+        android:layout_below="@+id/linearSaldo"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:id="@+id/btVoltar"
+        android:layout_width="219dp"
+        android:layout_height="36dp"
+        android:text="Voltar"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"
+        android:background="#ffa602"
+        android:layout_marginTop="5dp"
+        style="@style/Base.DialogWindowTitle.AppCompat"
+        android:onClick="btVoltar"
+        android:layout_below="@+id/imgImagem"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

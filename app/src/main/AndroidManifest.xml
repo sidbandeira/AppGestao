@@ -15,21 +15,51 @@
         android:icon="@drawable/icone_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:label="S-Gestão" android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:label="S-Gestão"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VendasActivity" android:label="Resumo de Vendas" android:screenOrientation="portrait"/>
-        <activity android:name=".PostosActivity" android:label="Controle de Tanques " android:screenOrientation="portrait"/>
-        <activity android:name=".FechamentoCaixaActivity" android:label="Fechamento de Caixa" android:screenOrientation="portrait"/>
-        <activity android:name=".estoque.ProdutosActivity" android:label="Listagem de Produtos" android:screenOrientation="portrait"/>
-        <activity android:name=".menu.MenuActivity" android:label="Menu" android:screenOrientation="portrait"/>
-        <activity android:name=".unidadeNegocio.SelecaoUnidadeActivity" android:label="Unidades de Negócio" android:screenOrientation="portrait"/>
-        <activity android:name=".pedidoCompra.PedidoCompraActivity" android:label="Pedido de Compra" android:screenOrientation="portrait"/>
-        <activity android:name=".pedidoCompra.PedidoCompraItemActivity" android:label="Seleção" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".VendasActivity"
+            android:label="Resumo de Vendas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PostosActivity"
+            android:label="Controle de Tanques "
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FechamentoCaixaActivity"
+            android:label="Fechamento de Caixa"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".estoque.ProdutosActivity"
+            android:label="Listagem de Produtos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.MenuActivity"
+            android:label="Menu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".unidadeNegocio.SelecaoUnidadeActivity"
+            android:label="Unidades de Negócio"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pedidoCompra.PedidoCompraActivity"
+            android:label="Pedido de Compra"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pedidoCompra.PedidoCompraItemActivity"
+            android:label="Seleção"
+            android:screenOrientation="portrait" />
+        <activity android:name=".estoque.ProdDetalheActivity"
+            android:label="Detalhe do Produto"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
