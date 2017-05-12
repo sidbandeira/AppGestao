@@ -84,7 +84,13 @@ public class ProdListFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Produto pro = (Produto) adapterView.getItemAtPosition(i);
-        Intent it = new Intent(getActivity(),ProdutosActivity.class );
+        Intent it = new Intent(getActivity(),ProdDetalheActivity.class );
+        it.putExtra( "descricao" , pro.produtoDescricao );
+        it.putExtra( "codBarras" , pro.produtoCodBarras );
+        it.putExtra( "precoCusto" , pro.produtoPrecoCusto.toString() );
+        it.putExtra( "precoVenda" , pro.produtoPrecoVenda.toString() );
+        it.putExtra( "saldo" , pro.produtoSaldo.toString() );
+
         startActivity(it);
     }
 

@@ -47,7 +47,7 @@ public class ProdListAdapter extends ArrayAdapter<Produto> {
         holder.txtUltimaCompra.setText(produto.produtodtultimacompra);
         holder.txtSaldo.setText(produto.produtoSaldo.toString());
 
-        Picasso.with(getContext()).load("http://sgestao.hol.es/img/" + produto.produtoCodBarras+".jpg").into(holder.imgFoto);
+        Picasso.with(getContext()).load("http://sgestao.hol.es/img/" + produto.produtoCodBarras+".png").into(holder.imgFoto);
 
         return convertView;
     }
