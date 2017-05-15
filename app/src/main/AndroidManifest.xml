@@ -26,15 +26,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VendasActivity"
+            android:name=".ResumoVendas.VendasActivity"
             android:label="Resumo de Vendas"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PostosActivity"
+            android:name=".Postos.PostosActivity"
             android:label="Controle de Tanques "
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FechamentoCaixaActivity"
+            android:name=".FluxoCaixa.FechamentoCaixaActivity"
             android:label="Fechamento de Caixa"
             android:screenOrientation="portrait" />
         <activity

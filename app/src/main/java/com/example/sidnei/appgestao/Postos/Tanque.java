@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.tanque;
+package com.example.sidnei.appgestao.Postos;
 
 public class Tanque {
     public int codTanque;

@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.sidnei.appgestao.FechamentoCaixaActivity;
+import com.example.sidnei.appgestao.FluxoCaixa.FechamentoCaixaActivity;
 import com.example.sidnei.appgestao.MainActivity;
-import com.example.sidnei.appgestao.PostosActivity;
+import com.example.sidnei.appgestao.Postos.PostosActivity;
 import com.example.sidnei.appgestao.estoque.ProdutosActivity;
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.VendasActivity;
+import com.example.sidnei.appgestao.ResumoVendas.VendasActivity;
 import com.example.sidnei.appgestao.pedidoCompra.PedidoCompraActivity;
 
 import java.util.ArrayList;

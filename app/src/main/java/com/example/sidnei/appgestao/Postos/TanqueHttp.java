@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.tanque;
+package com.example.sidnei.appgestao.Postos;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

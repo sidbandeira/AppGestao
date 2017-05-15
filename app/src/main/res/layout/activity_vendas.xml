@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".VendasActivity">
+    tools:context=".ResumoVendas.VendasActivity">
 
     <TextView
         android:layout_width="match_parent"
