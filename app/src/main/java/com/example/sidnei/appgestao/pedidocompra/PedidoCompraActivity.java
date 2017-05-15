@@ -75,32 +75,37 @@ public class PedidoCompraActivity extends AppCompatActivity {
 
         //VALIDA FORNECEDOR
         if(descricaofornecedor.toString().contains("Selecione") || descricaofornecedor.toString().equals("")){
-            Toast.makeText(this,"Selecione um fornecedor!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Selecione um fornecedor!",Toast.LENGTH_SHORT).show();
         }else{
             //VALIDA EMAIL FORNECEDOR
             if(email.isEmpty()){
-                Toast.makeText(this,"Informe o e-mail do fornecedor!",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Informe o e-mail do fornecedor!",Toast.LENGTH_SHORT).show();
                 edtEmail.requestFocus();
             }else {
-                //VALIDA DATA DE EMISSAO DO PEDIDO
-                if (Validacoes.validaData(edtData.getText().toString(), "dd/MM/yy") == false) {
-                    Toast.makeText(this, "Informe uma data de pedido válida!", Toast.LENGTH_LONG).show();
-                    edtData.requestFocus();
-                } else {
-                    //VALIDA DATA DE ENTREGA DO PEDIDO
-                    if (Validacoes.validaData(edtDataEntrega.getText().toString(), "dd/MM/yy") == false) {
-                        Toast.makeText(this, "Informe uma data de entrega válida!", Toast.LENGTH_LONG).show();
-                        edtDataEntrega.requestFocus();
+                if(Validacoes.validaEmail(email) == false){
+                    Toast.makeText(this, "E-mail informado é inválido!", Toast.LENGTH_SHORT).show();
+                    edtEmail.requestFocus();
+                }else{
+                    //VALIDA DATA DE EMISSAO DO PEDIDO
+                    if (Validacoes.validaData(edtData.getText().toString(), "dd/MM/yy") == false) {
+                        Toast.makeText(this, "Informe uma data de pedido válida!", Toast.LENGTH_SHORT).show();
+                        edtData.requestFocus();
                     } else {
-                        //PASSA OS VALORES DA TELA DE PEDIDO PARA A TELA DE ITENS DO PEDIDO
-                        Intent it = new Intent(this, PedidoCompraItemActivity.class);
-                        it.putExtra("codfornecedor", codFornecedor.toString());
-                        it.putExtra("descricaofornecedor", descricaofornecedor);
-                        it.putExtra("email", email);
-                        it.putExtra("datapedido", datapedido);
-                        it.putExtra("dataentrega", dataentrega);
-                        it.putExtra("formapgto", formapgto);
-                        startActivityForResult(it, 1);
+                        //VALIDA DATA DE ENTREGA DO PEDIDO
+                        if (Validacoes.validaData(edtDataEntrega.getText().toString(), "dd/MM/yy") == false) {
+                            Toast.makeText(this, "Informe uma data de entrega válida!", Toast.LENGTH_SHORT).show();
+                            edtDataEntrega.requestFocus();
+                        } else {
+                            //PASSA OS VALORES DA TELA DE PEDIDO PARA A TELA DE ITENS DO PEDIDO
+                            Intent it = new Intent(this, PedidoCompraItemActivity.class);
+                            it.putExtra("codfornecedor", codFornecedor.toString());
+                            it.putExtra("descricaofornecedor", descricaofornecedor);
+                            it.putExtra("email", email);
+                            it.putExtra("datapedido", datapedido);
+                            it.putExtra("dataentrega", dataentrega);
+                            it.putExtra("formapgto", formapgto);
+                            startActivityForResult(it, 1);
+                        }
                     }
                 }
             }
