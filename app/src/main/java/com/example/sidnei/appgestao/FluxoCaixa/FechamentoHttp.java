@@ -44,7 +44,7 @@ public class FechamentoHttp {
     public static List<Venda> carregarVendaJson(Integer codunidade, String datavenda) {
         try {
 
-            HttpURLConnection conexao = connectar(FECHAMENTO_URL_JSON + 3 + "&datavenda=" + "2017-05-17");
+            HttpURLConnection conexao = connectar(FECHAMENTO_URL_JSON + codunidade + "&datavenda=" + datavenda);
             int resposta = conexao.getResponseCode();
             if (resposta == HttpURLConnection.HTTP_OK) {
                 InputStream is = conexao.getInputStream();
