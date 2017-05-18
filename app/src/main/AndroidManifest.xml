@@ -57,9 +57,16 @@
             android:name=".pedidoCompra.PedidoCompraItemActivity"
             android:label="Seleção"
             android:screenOrientation="portrait" />
-        <activity android:name=".estoque.ProdDetalheActivity"
+        <activity
+            android:name=".estoque.ProdDetalheActivity"
             android:label="Detalhe do Produto"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FluxoCaixa.FechamentoPesquisaActivity"
+            android:label="Filtrar Fechamento de Caixa"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

@@ -7,13 +7,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".FluxoCaixa.FechamentoCaixaActivity">
+    tools:context=".FluxoCaixa.FechamentoCaixaActivity"
+    android:background="@drawable/fundo_padrao">
 
-    <TextView
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        android:text="Fechamento de Caixa"/>
+        android:name="com.example.sidnei.appgestao.FluxoCaixa.FechamentoListFragment"
+        android:id="@+id/listFragment"/>
+
 
 </RelativeLayout>
