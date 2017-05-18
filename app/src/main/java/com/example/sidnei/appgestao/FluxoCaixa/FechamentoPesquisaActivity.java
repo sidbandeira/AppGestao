@@ -9,7 +9,9 @@ import android.widget.EditText;
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.utilitario.Mascara;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FechamentoPesquisaActivity extends AppCompatActivity {
     private EditText edtData;
@@ -33,14 +35,16 @@ public class FechamentoPesquisaActivity extends AppCompatActivity {
     }
 
     public void ibtPesquisar(View view) {
-        //SimpleDateFormat sdfBD = new SimpleDateFormat("yyyy/MM/dd");
-        String temp = edtData.getText().toString();
-        String dataParaBanco = new SimpleDateFormat("yyyy/MM/dd").format(temp);
-
-        //temp = sdfBD.format(temp);
-        dataParaBanco = dataParaBanco.replace("/","-");
-        dataFormatadaBanco = dataParaBanco;
-
+        //SimpleDateFormat sdfBD = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = sdf2.parse(edtData.getText().toString());
+            String dataParaBanco = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            dataParaBanco = dataParaBanco.replace("/","-");
+            dataFormatadaBanco = dataParaBanco;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Intent it = new Intent(this, FechamentoCaixaActivity.class);
         startActivity(it);
 
