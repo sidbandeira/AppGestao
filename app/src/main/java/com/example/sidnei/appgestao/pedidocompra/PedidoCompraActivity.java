@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.pedidoCompra.Classes.Fornecedor;
+import com.example.sidnei.appgestao.Classes.Fornecedor;
 import com.example.sidnei.appgestao.utilitario.JSON;
 import com.example.sidnei.appgestao.utilitario.Mascara;
 import com.example.sidnei.appgestao.utilitario.Validacoes;
