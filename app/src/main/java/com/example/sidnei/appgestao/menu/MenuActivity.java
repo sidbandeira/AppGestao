@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.sidnei.appgestao.Classes.Menu;
 import com.example.sidnei.appgestao.FluxoCaixa.FechamentoPesquisaActivity;
 import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.Postos.PostosActivity;

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompra;
-import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompraItem;
+import com.example.sidnei.appgestao.Classes.PedidoCompra;
+import com.example.sidnei.appgestao.Classes.PedidoCompraItem;
 
 public class PedidoCompraDB extends SQLiteOpenHelper{
 

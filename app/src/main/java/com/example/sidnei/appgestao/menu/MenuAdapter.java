@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sidnei.appgestao.Classes.Menu;
 import com.example.sidnei.appgestao.R;
 
 import java.util.List;

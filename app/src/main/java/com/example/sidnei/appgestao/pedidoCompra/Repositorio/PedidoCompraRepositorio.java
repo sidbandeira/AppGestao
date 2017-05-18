@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.sidnei.appgestao.pedidoCompra.Classes.PedidoCompra;
+import com.example.sidnei.appgestao.Classes.PedidoCompra;
 import com.example.sidnei.appgestao.pedidoCompra.Persistencia.PedidoCompraSQLHelper;
 
 public class PedidoCompraRepositorio {

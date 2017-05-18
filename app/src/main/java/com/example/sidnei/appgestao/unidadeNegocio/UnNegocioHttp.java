@@ -5,7 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocio;
+import com.example.sidnei.appgestao.Classes.UnidadeNegocio;
 
 import org.json.JSONArray;
 import org.json.JSONException;

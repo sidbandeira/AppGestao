@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.pedidoCompra.Classes.Fornecedor;
+import com.example.sidnei.appgestao.Classes.Fornecedor;
 
 import java.util.ArrayList;
 

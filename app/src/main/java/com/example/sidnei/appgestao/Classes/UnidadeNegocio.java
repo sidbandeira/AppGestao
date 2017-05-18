@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.unidadeNegocio;
+package com.example.sidnei.appgestao.Classes;
 
 import java.io.Serializable;
 

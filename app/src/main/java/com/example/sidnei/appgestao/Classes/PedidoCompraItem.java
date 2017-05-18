@@ -1,4 +1,4 @@
-package com.example.sidnei.appgestao.pedidoCompra.Classes;
+package com.example.sidnei.appgestao.Classes;
 
 public class PedidoCompraItem {
 

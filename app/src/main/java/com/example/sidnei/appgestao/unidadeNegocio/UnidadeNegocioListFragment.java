@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.sidnei.appgestao.Classes.UnidadeNegocio;
 import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.menu.MenuActivity;

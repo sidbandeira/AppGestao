@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.sidnei.appgestao.Classes.Tanque;
 import com.example.sidnei.appgestao.R;
 
 import org.json.JSONArray;
