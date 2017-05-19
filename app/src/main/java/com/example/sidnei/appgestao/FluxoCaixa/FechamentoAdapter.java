@@ -37,21 +37,17 @@ public class FechamentoAdapter extends ArrayAdapter<Venda> {
         } else {
             holder = (FechamentoAdapter.ViewHolder)convertView.getTag();
         }
-        //holder.imgFoto = (ImageView) convertView.findViewById(R.id.imgFoto);
-        holder.txtNomeVendedor.setText(String.valueOf(venda.nomevendedor));
-        holder.txtTotVenda.setText(String.valueOf(venda.totalvenda));
-        holder.txtTotDeclarado.setText(String.valueOf(venda.declaradovenda));
+        holder.txtNomeVendedor.setText(venda.nomevendedor);
+        holder.txtTotVenda.setText(String.valueOf(String.format("%.2f", venda.totalvenda)));
+        holder.txtTotDeclarado.setText(String.valueOf(String.format("%.2f", venda.declaradovenda)));
+        holder.txtTotDiferenca.setText(String.format("%.2f", (venda.declaradovenda - venda.totalvenda)));
 
-        holder.txtTotDiferenca.setText(String.valueOf(venda.declaradovenda - venda.totalvenda));
         // SE VALOR DA DIFERENÇA FOR NEGATIVO PASSA A COR DA FONTE PARA VERMELHO
         if((venda.declaradovenda - venda.totalvenda) < 0 ){
             holder.txtTotDiferenca.setTextColor(Color.parseColor("#ff0000"));
         }
         holder.txtDataFechamento.setText(venda.datavenda);
         holder.txtHoraAtualiza.setText(venda.horaatualizacao);
-
-        //Picasso.with(getContext()).load("http://sgestao.hol.es/img/" + produto.produtoCodBarras+".png").into(holder.imgFoto);
-
         return convertView;
     }
 

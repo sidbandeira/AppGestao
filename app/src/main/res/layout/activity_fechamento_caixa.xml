@@ -10,11 +10,75 @@
     tools:context=".FluxoCaixa.FechamentoCaixaActivity"
     android:background="@drawable/fundo_padrao">
 
-    <fragment
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.sidnei.appgestao.FluxoCaixa.FechamentoListFragment"
-        android:id="@+id/listFragment"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/lnFragment">
+
+        <fragment
+            android:id="@+id/listFragment"
+            android:name="com.example.sidnei.appgestao.FluxoCaixa.FechamentoListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="411dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/lnTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lnFragment">
+
+        <TextView
+            android:id="@+id/txtTot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffa602"
+            android:textSize="20dp"
+            android:text="Total ..R$: " />
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/txtTot"
+            android:layout_alignBaseline="@+id/txtTot"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffa602"
+            android:textSize="20dp"
+            android:text="0.00"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnDif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lnTotal">
+
+        <TextView
+            android:id="@+id/txtDif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffa602"
+            android:textSize="20dp"
+            android:text="Sobra .R$: " />
+
+        <TextView
+            android:id="@+id/txtDiferenca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtTot"
+            android:layout_toEndOf="@+id/txtTot"
+            android:text="0.00"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffa602"
+            android:textSize="20dp" />
+    </LinearLayout>
+
 
 
 </RelativeLayout>

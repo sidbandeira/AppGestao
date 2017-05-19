@@ -1,5 +1,6 @@
 package com.example.sidnei.appgestao.FluxoCaixa;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ public class FechamentoListFragment extends Fragment implements AdapterView.OnIt
     TextView mTextMensagem;
     ProgressBar mProgressBar;
     ArrayAdapter<Venda> mAdapter;
+    TextView txtTotVenda;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,6 @@ public class FechamentoListFragment extends Fragment implements AdapterView.OnIt
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         if (mVenda == null) {
             mVenda = new ArrayList<Venda>();
         }
@@ -112,6 +113,24 @@ public class FechamentoListFragment extends Fragment implements AdapterView.OnIt
                 mVenda.clear();
                 mVenda.addAll(vendas);
                 mAdapter.notifyDataSetChanged();
+                Double tot = 0.00;
+                Double dif = 0.00;
+                for (int i = 0; i < vendas.size(); i++) {
+                    tot = tot + vendas.get(i).totalvenda;
+                    dif = dif + (vendas.get(i).declaradovenda - vendas.get(i).totalvenda );
+                }
+
+                FechamentoCaixaActivity.txtTotal.setText(String.valueOf(String.format("%.2f", tot)));
+                if (dif < 0){
+                    FechamentoCaixaActivity.txtDif.setTextColor(Color.parseColor("#ff0000"));
+                    FechamentoCaixaActivity.txtDif.setText("Falta ..R$: ");
+                    FechamentoCaixaActivity.txtDiferenca.setTextColor(Color.parseColor("#ff0000"));
+                }else{
+                    FechamentoCaixaActivity.txtDif.setText("Sobra .R$: ");
+                }
+
+                FechamentoCaixaActivity.txtDiferenca.setText(String.valueOf(String.format("%.2f", dif)));
+
             } else {
                 mTextMensagem.setText("Falha ao obter registros");
             }
