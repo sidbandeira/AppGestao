@@ -82,7 +82,7 @@ public class UnidadeNegocioListFragment extends Fragment implements AdapterView.
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         UnidadeNegocio unneg = (UnidadeNegocio) adapterView.getItemAtPosition(i);
-        codUnidade = unneg.id;
+        codUnidade = unneg.codunidade;
         Intent it = new Intent(getActivity(),MenuActivity.class );
         startActivity(it);
     }

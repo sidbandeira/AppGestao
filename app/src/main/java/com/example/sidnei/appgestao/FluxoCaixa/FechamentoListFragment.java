@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.sidnei.appgestao.Classes.Venda;
 import com.example.sidnei.appgestao.R;
+import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocioListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +101,7 @@ public class FechamentoListFragment extends Fragment implements AdapterView.OnIt
         }
         @Override
         protected List<Venda> doInBackground(Void... strings) {
-            return FechamentoHttp.carregarVendaJson(3,FechamentoPesquisaActivity.dataVenda);
+            return FechamentoHttp.carregarVendaJson(UnidadeNegocioListFragment.codUnidade,FechamentoPesquisaActivity.dataFormatadaBanco);
         }
 
         @Override

@@ -68,7 +68,7 @@ public class  UnNegocioHttp{
         for (int i = 0; i < jsonUnidades.length(); i++) {
             JSONObject jsonUn = jsonUnidades.getJSONObject(i);
             UnidadeNegocio unidadenegocio = new UnidadeNegocio(
-                    jsonUn.getInt("id"),
+                    jsonUn.getInt("codunidade"),
                     jsonUn.getString("razaosocial")
             );
             listaDeUnidadeNegocio.add(unidadenegocio);

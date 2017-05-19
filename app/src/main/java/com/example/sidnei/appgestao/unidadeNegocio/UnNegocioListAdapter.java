@@ -24,19 +24,19 @@ public class UnNegocioListAdapter extends ArrayAdapter<UnidadeNegocio> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_unidadenegocio_list, null);
             holder = new ViewHolder();
-            holder.txtId = (TextView)convertView.findViewById(R.id.txtId);
+            holder.txtUnid = (TextView)convertView.findViewById(R.id.txtUnid);
             holder.txtRazaoSocial =  (TextView)convertView.findViewById(R.id.txtRazaoSocial);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
         }
-        holder.txtId.setText(String.valueOf(unidadenegocio.id));
+        holder.txtUnid.setText(String.valueOf(unidadenegocio.codunidade));
         holder.txtRazaoSocial.setText(unidadenegocio.razaosocial);
 
         return convertView;
     }
     static class ViewHolder {
-        TextView txtId;
+        TextView txtUnid;
         TextView txtRazaoSocial;
 
     }
