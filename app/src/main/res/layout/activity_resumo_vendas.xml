@@ -7,13 +7,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".ResumoVendas.VendasActivity">
+    tools:context=".ResumoVendas.ResumoVendasActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:text="Relatório de vendas"/>
+    <WebView
+        android:id="@+id/wvGrafico"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

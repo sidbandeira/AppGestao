@@ -12,7 +12,7 @@ import com.example.sidnei.appgestao.FluxoCaixa.FechamentoPesquisaActivity;
 import com.example.sidnei.appgestao.MainActivity;
 import com.example.sidnei.appgestao.Postos.PostosActivity;
 import com.example.sidnei.appgestao.R;
-import com.example.sidnei.appgestao.ResumoVendas.VendasActivity;
+import com.example.sidnei.appgestao.ResumoVendas.ResumoVendasActivity;
 import com.example.sidnei.appgestao.estoque.ProdutosActivity;
 import com.example.sidnei.appgestao.pedidoCompra.PedidoCompraActivity;
 
@@ -88,7 +88,7 @@ public class MenuActivity extends AppCompatActivity implements AdapterView.OnIte
                     startActivity(it);
                 break;
             case "Vendas":
-                    Intent it1 = new Intent(this, VendasActivity.class);
+                    Intent it1 = new Intent(this, ResumoVendasActivity.class);
                     startActivity(it1);
                 break;
             case "Caixa":

@@ -26,9 +26,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ResumoVendas.VendasActivity"
+            android:name=".ResumoVendas.ResumoVendasActivity"
             android:label="Resumo de Vendas"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Postos.PostosActivity"
             android:label="Controle de Tanques "
