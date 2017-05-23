@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name=".ResumoVendas.ResumoVendasActivity"
-            android:label="Resumo de Vendas"
+            android:label="Gráfico"
             android:screenOrientation="landscape" />
         <activity
             android:name=".Postos.PostosActivity"

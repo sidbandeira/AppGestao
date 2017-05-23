@@ -40,7 +40,6 @@ public class TanquesListAdapter extends ArrayAdapter<Tanque>{
         Resources res = getContext().getResources();
         TypedArray logos = res.obtainTypedArray(R.array.logos);
         holder.imgTanque.setImageDrawable(logos.getDrawable(tanque.codImagem));
-
         holder.txtTanque.setText(Integer.toString(tanque.codTanque) + " - " + tanque.tipoCombustivel);
         holder.txtCapacidade.setText(Double.toString(tanque.capacidadeTanque)) ;
         holder.txtEstoque.setText(Double.toString(tanque.estoqueTanque));

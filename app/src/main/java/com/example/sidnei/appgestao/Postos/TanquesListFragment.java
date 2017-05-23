@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.sidnei.appgestao.Classes.Tanque;
 import com.example.sidnei.appgestao.R;
+import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocioListFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,7 +112,7 @@ public class TanquesListFragment extends Fragment{
 
         public  List<Tanque> carregarTanquesJson() {
             try {
-                HttpURLConnection conexao = TanqueHttp.connectar();
+                HttpURLConnection conexao = TanqueHttp.connectar(UnidadeNegocioListFragment.codUnidade);
                 int resposta = conexao.getResponseCode();
                 if (resposta ==  HttpURLConnection.HTTP_OK) {
                     InputStream is = conexao.getInputStream();
@@ -129,14 +130,21 @@ public class TanquesListFragment extends Fragment{
             //OBJETO PAI DO JSON
             JSONArray jsonTanque = json.getJSONArray("tanques");
             for (int i = 0; i < jsonTanque.length(); i++) {
+                Double capacidade = 0.00;
+                Double estoque = 0.00;
+                Double percent = 0.00;
                 JSONObject jsonTq = jsonTanque.getJSONObject(i);
-                Tanque tanque = new Tanque(
-                        jsonTq.getInt("numero"),
-                        jsonTq.getString("descricao"),
-                        jsonTq.getDouble("volumeTotal"),
-                        jsonTq.getDouble("volume"),
-                        jsonTq.getInt("numero")
-                );
+                Tanque tanque = new Tanque();
+                capacidade = jsonTq.getDouble("volumetotal");
+                estoque = jsonTq.getDouble("volume");
+                percent = (100 * estoque)/capacidade;
+
+                tanque.setCodTanque(jsonTq.getInt("codintegracao"));
+                tanque.setTipoCombustivel(jsonTq.getString("descricao"));
+                tanque.setCapacidadeTanque(jsonTq.getDouble("volumetotal"));
+                tanque.setEstoqueTanque(jsonTq.getDouble("volume"));
+                tanque.setCodImagem(RetornaCodImagem(percent));
+
                 listaDeTanques.add(tanque);
             }
             return listaDeTanques;
@@ -158,5 +166,31 @@ public class TanquesListFragment extends Fragment{
 
     }
 
+    // RETORNA O CODIGO DA IMAGEM A SER  SETADA.
+    private static Integer RetornaCodImagem(Double percent){
+        Integer cod = 0;
 
+        if(percent < 15.0){
+            //<item>@drawable/tqvazio</item>
+            cod = 0;
+        }else{
+            if(percent < 30){
+                //<item>@drawable/tqmedio</item>
+                cod = 1;
+            }else{
+                if(percent < 75){
+                    //<item>@drawable/tqnormal</item>
+                    cod =2;
+                }else{
+                    //<item>@drawable/tqcheio</item>
+                    cod =3;
+                }
+            }
+        }
+        return cod;
+    }
 }
+
+
+
+

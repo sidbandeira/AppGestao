@@ -87,8 +87,8 @@ public class ResumoVendasActivity extends AppCompatActivity {
                 rotuloColuna = rotuloColuna.substring(1);
                 parametros =  "0," + escalaMaior.toString();
                 escala = escalaMenor.toString() + "," + escalaMaior.toString();
-                legenda = "legenda";
-                cabecalhoGrafico = "teste";
+                legenda = "Vendas";
+                cabecalhoGrafico = "Total Venda/Mês";
 
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
@@ -103,7 +103,7 @@ public class ResumoVendasActivity extends AppCompatActivity {
             strURL = "https://chart.googleapis.com/chart?" +
                     "cht=lc&" + //define o tipo do gráfico "linha"
                     "chxt=x,y&" + //imprime os valores dos eixos X, Y
-                    "chs=600x300&" + //define o tamanho da imagem
+                    "chs=570x280&" + //define o tamanho da imagem
                     "chd=t:"+ valorColuna+"&" + //valor de cada coluna do gráfico
                     "chl="+rotuloColuna+"&" + //rótulo para cada coluna
                     "chdl="+legenda+"&" + //legenda do gráfico

@@ -9,10 +9,10 @@
     </array>
 
     <array name="logos">
-        <item>@drawable/tqcheio</item>
-        <item>@drawable/tqnormal</item>
-        <item>@drawable/tqmedio</item>
         <item>@drawable/tqvazio</item>
+        <item>@drawable/tqmedio</item>
+        <item>@drawable/tqnormal</item>
+        <item>@drawable/tqcheio</item>
     </array>
 
     <array name="formapagamento">
