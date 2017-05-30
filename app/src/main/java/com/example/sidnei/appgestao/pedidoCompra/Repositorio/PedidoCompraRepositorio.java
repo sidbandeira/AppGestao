@@ -86,7 +86,7 @@ public class PedidoCompraRepositorio {
         Cursor cursor;
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        String[] campos =  {"_id, idfornecedor, descricaofornecedor, totalpedido, formapgto, dtpedido"};
+        String[] campos =  {"_id, idfornecedor, descricaofornecedor, totalpedido, formapgto, dtpedido, dtentrega"};
         cursor = db.query("pedidocompra", campos, null, null, null, null, null, null);
 
         if(cursor!=null){

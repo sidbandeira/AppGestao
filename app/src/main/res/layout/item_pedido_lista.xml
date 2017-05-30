@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#5D5E60"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtFornecedorPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FORNECEDOR DO PEDIDO"
+        android:textColor="#ffa602"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_below="@id/txtFornecedorPedido"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffa602"
+                android:text="Valor R$: "/>
+
+            <TextView
+                android:id="@+id/txtValorPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffa602"
+                android:text="0.00"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffa602"
+                android:text="Previsão Entrega: "/>
+
+            <TextView
+                android:id="@+id/txtDataEntrega"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffa602"
+                android:text="01/01/2017"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
