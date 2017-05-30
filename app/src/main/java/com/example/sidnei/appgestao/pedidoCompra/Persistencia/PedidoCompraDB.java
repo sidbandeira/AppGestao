@@ -19,7 +19,7 @@ public class PedidoCompraDB extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         //CRIA A TABELA PEDIDOCOMPRA
         db.execSQL("create table if not exists pedidocompra (_id integer primary key autoincrement," +
-                " idFornecedor long, dtPedido text, totalPedido DOUBLE, formapgto text, codempresa long, codunnegocio long);");
+                " idfornecedor long, descricaofornecedor text, dtPedido text, totalPedido DOUBLE, formapgto text, codempresa long, codunnegocio long);");
         //CRIA A TABELA PEDIDOCOMPRAITEM
         db.execSQL("create table if not exists pedidocompraitem (_id integer primary key autoincrement," +
                 " idCompra long ,iditem long, descricaoitem text, qtdeitem DOUBLE,precocusto DOUBLE, totalitem DOUBLE);");
@@ -35,6 +35,7 @@ public class PedidoCompraDB extends SQLiteOpenHelper{
         try{
             ContentValues values = new ContentValues();
             values.put("idfornecedor", pedido.idFornecedor);
+            values.put("descricaofornecedor", pedido.descricaofornecedor);
             values.put("codempresa", pedido.codEmpresa);
             values.put("codunnegocio", pedido.codUnNegocio);
             values.put("totalpedido", pedido.totalPedido);
@@ -68,4 +69,5 @@ public class PedidoCompraDB extends SQLiteOpenHelper{
             db.close();
         }
     }
-}
+
+    }

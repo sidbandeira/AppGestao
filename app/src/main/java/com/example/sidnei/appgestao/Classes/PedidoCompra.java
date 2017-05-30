@@ -3,6 +3,7 @@ package com.example.sidnei.appgestao.Classes;
 public class PedidoCompra {
     public long _id;
     public long idFornecedor;
+    public String descricaofornecedor;
     public long codEmpresa;
     public long codUnNegocio;
     public String email;
@@ -83,10 +84,19 @@ public class PedidoCompra {
         this.totalPedido = totalPedido;
     }
 
-    public PedidoCompra(long _id, long idFornecedor, long codEmpresa, long codUnNegocio,String email, String dtPedido,
+    public String getDescricaofornecedor() {
+        return descricaofornecedor;
+    }
+
+    public void setDescricaofornecedor(String descricaofornecedor) {
+        this.descricaofornecedor = descricaofornecedor;
+    }
+
+    public PedidoCompra(long _id, long idFornecedor, String descricaofornecedor, long codEmpresa, long codUnNegocio,String email, String dtPedido,
                         String dtEntrega, Double totalPedido, String formapgto){
         this._id = _id;
         this.idFornecedor = idFornecedor;
+        this.descricaofornecedor= descricaofornecedor;
         this.codEmpresa = codEmpresa;
         this.codUnNegocio = codUnNegocio;
         this.email = email;

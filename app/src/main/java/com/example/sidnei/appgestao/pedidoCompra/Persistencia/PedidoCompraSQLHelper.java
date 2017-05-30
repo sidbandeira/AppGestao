@@ -13,6 +13,7 @@ public class PedidoCompraSQLHelper extends SQLiteOpenHelper {
     public static final String TABELA = "pedidocompra";
     public static final String COLUNA_IDPEDIDO = "_id";
     public static final String COLUNA_IDFORNECEDOR = "idfornecedor";
+    public static final String COLUNA_DESCRICAOFORNECEDOR = "descricaofornecedor";
     public static final String COLUNA_IDEMPRESA = "codempresa";
     public static final String COLUNA_IDUNIDADE = "codunnegocio";
     public static final String COLUNA_EMAIL = "email";
@@ -43,6 +44,7 @@ public class PedidoCompraSQLHelper extends SQLiteOpenHelper {
                 "CREATE TABLE "+ TABELA +" (" +
                         COLUNA_IDPEDIDO +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
                         COLUNA_IDFORNECEDOR +" INTEGER,"+
+                        COLUNA_DESCRICAOFORNECEDOR +" TEXT,"+
                         COLUNA_IDEMPRESA +" INTEGER,"+
                         COLUNA_IDUNIDADE +" INTEGER,"+
                         COLUNA_EMAIL +" TEXT,"+

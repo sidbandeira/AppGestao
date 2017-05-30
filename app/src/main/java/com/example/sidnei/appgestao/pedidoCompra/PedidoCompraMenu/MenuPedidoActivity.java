@@ -1,12 +1,12 @@
 package com.example.sidnei.appgestao.pedidoCompra.PedidoCompraMenu;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.sidnei.appgestao.Postos.PostosActivity;
 import com.example.sidnei.appgestao.R;
+import com.example.sidnei.appgestao.pedidoCompra.ListaPedidoCompraActivity;
 import com.example.sidnei.appgestao.pedidoCompra.PedidoCompraActivity;
 
 public class MenuPedidoActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class MenuPedidoActivity extends AppCompatActivity {
     }
 
     public void btnListar(View view) {
-        Intent it = new Intent(this, PostosActivity.class);
+        Intent it = new Intent(this, ListaPedidoCompraActivity.class);
         startActivity(it);
     }
 

@@ -232,6 +232,7 @@ public class PedidoCompraItemActivity extends AppCompatActivity {
             pedido.codEmpresa = MainActivity.codEmpresa;
             pedido.codUnNegocio = UnidadeNegocioListFragment.codUnidade;
             pedido.idFornecedor = codfornecedor;
+            pedido.descricaofornecedor = descricaofornecedor;
             pedido.email = email;
             pedido.dtPedido = datapedido;
             pedido.dtEntrega = dataentrega;

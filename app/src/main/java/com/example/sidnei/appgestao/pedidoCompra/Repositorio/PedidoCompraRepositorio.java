@@ -2,6 +2,7 @@ package com.example.sidnei.appgestao.pedidoCompra.Repositorio;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sidnei.appgestao.Classes.PedidoCompra;
@@ -22,6 +23,7 @@ public class PedidoCompraRepositorio {
         cv.put(PedidoCompraSQLHelper.COLUNA_IDEMPRESA, compra.codEmpresa);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDUNIDADE, compra.codUnNegocio);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDFORNECEDOR, compra.idFornecedor);
+        cv.put(PedidoCompraSQLHelper.COLUNA_DESCRICAOFORNECEDOR, compra.descricaofornecedor);
         cv.put(PedidoCompraSQLHelper.COLUNA_EMAIL, compra.email);
         cv.put(PedidoCompraSQLHelper.COLUNA_DATAPEDIDO, compra.dtPedido);
         cv.put(PedidoCompraSQLHelper.COLUNA_DATAENTREGA, compra.dtEntrega);
@@ -44,6 +46,7 @@ public class PedidoCompraRepositorio {
         cv.put(PedidoCompraSQLHelper.COLUNA_IDEMPRESA, compra.codEmpresa);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDUNIDADE, compra.codUnNegocio);
         cv.put(PedidoCompraSQLHelper.COLUNA_IDFORNECEDOR, compra.idFornecedor);
+        cv.put(PedidoCompraSQLHelper.COLUNA_DESCRICAOFORNECEDOR, compra.descricaofornecedor);
         cv.put(PedidoCompraSQLHelper.COLUNA_EMAIL, compra.email);
         cv.put(PedidoCompraSQLHelper.COLUNA_DATAPEDIDO, compra.dtPedido);
         cv.put(PedidoCompraSQLHelper.COLUNA_DATAENTREGA, compra.dtEntrega);
@@ -79,4 +82,18 @@ public class PedidoCompraRepositorio {
         return linhasAfetadas;
     }
 
+    public Cursor carregaDados(){
+        Cursor cursor;
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String[] campos =  {"_id, idfornecedor, descricaofornecedor, totalpedido, formapgto, dtpedido"};
+        cursor = db.query("pedidocompra", campos, null, null, null, null, null, null);
+
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        db.close();
+        return cursor;
     }
+
+}

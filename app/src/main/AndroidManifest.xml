@@ -65,11 +65,11 @@
             android:name=".FluxoCaixa.FechamentoPesquisaActivity"
             android:label="Filtrar Fechamento de Caixa"
             android:screenOrientation="portrait" />
-        <activity android:name=".pedidoCompra.PedidoCompraMenu.MenuPedidoActivity"
+        <activity
+            android:name=".pedidoCompra.PedidoCompraMenu.MenuPedidoActivity"
             android:label="Menu Pedido de Compra"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".pedidoCompra.ListaPedidoCompraActivity"></activity>
     </application>
 
 </manifest>
