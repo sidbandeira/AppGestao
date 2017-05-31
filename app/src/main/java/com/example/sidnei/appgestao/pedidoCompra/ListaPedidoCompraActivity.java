@@ -25,16 +25,17 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         PedidoCompraRepositorio rep = new PedidoCompraRepositorio(this);
         Cursor cursor = rep.carregaDados();
         List<PedidoCompra> pedido = new ArrayList<PedidoCompra>();
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                PedidoCompra ped = new PedidoCompra();
-                ped._id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
-                ped.descricaofornecedor = cursor.getString(cursor.getColumnIndexOrThrow("descricaofornecedor"));
-                ped.dtEntrega = cursor.getString(cursor.getColumnIndexOrThrow("dtentrega"));
-                ped.totalPedido = cursor.getDouble(cursor.getColumnIndexOrThrow("totalpedido"));
-                pedido.add(ped);
-                cursor.moveToNext();
+        if (cursor.getCount()> 0){
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    PedidoCompra ped = new PedidoCompra();
+                    ped._id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                    ped.descricaofornecedor = cursor.getString(cursor.getColumnIndexOrThrow("descricaofornecedor"));
+                    ped.dtEntrega = cursor.getString(cursor.getColumnIndexOrThrow("dtentrega"));
+                    ped.totalPedido = cursor.getDouble(cursor.getColumnIndexOrThrow("totalpedido"));
+                    pedido.add(ped);
+                    cursor.moveToNext();
+                }
             }
         }
         cursor.close();
