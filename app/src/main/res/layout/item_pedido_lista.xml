@@ -5,19 +5,56 @@
     android:background="#5D5E60"
     android:orientation="vertical">
 
+<LinearLayout
+    android:id="@+id/lnPedido"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
 
     <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/txtFornecedorPedido"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FORNECEDOR DO PEDIDO"
         android:textColor="#ffa602"
         android:textStyle="bold"
-        />
+        android:text="Pedido: "/>
+
+    <TextView
+        android:id="@+id/txtCodPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="001"
+        android:textColor="#ffa602"
+        android:textStyle="bold"/>
+</LinearLayout>
 
     <LinearLayout
-        android:layout_below="@id/txtFornecedorPedido"
+        android:layout_marginTop="5dp"
+        android:id="@+id/lnFornecedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lnPedido">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffa602"
+            android:textStyle="bold"
+            android:text="Fornecedor: "/>
+
+        <TextView
+            android:id="@+id/txtFornecedorPedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FORNECEDOR DO PEDIDO"
+            android:textColor="#ffa602"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/lnFornecedor"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffa602"
+                android:textStyle="bold"
                 android:text="Valor R$: "/>
 
             <TextView
@@ -52,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffa602"
+                android:textStyle="bold"
                 android:text="Previsão Entrega: "/>
 
             <TextView
@@ -60,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffa602"
                 android:text="01/01/2017"/>
-
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

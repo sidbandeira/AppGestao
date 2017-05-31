@@ -49,6 +49,7 @@ public class AdapterListaPedido extends BaseAdapter {
 
         //atravez do layout pego pelo LayoutInflater, pegamos cada id relacionado
         //ao item e definimos as informações.
+        ((TextView) convertView.findViewById(R.id.txtCodPedido)).setText(String.valueOf(ped._id));
         ((TextView) convertView.findViewById(R.id.txtFornecedorPedido)).setText(ped.descricaofornecedor);
         ((TextView) convertView.findViewById(R.id.txtValorPedido)).setText(ped.totalPedido.toString());
         ((TextView) convertView.findViewById(R.id.txtDataEntrega)).setText(ped.dtEntrega);

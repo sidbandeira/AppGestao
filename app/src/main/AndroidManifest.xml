@@ -68,8 +68,12 @@
         <activity
             android:name=".pedidoCompra.PedidoCompraMenu.MenuPedidoActivity"
             android:label="Menu Pedido de Compra"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".pedidoCompra.ListaPedidoCompraActivity"></activity>
+            android:screenOrientation="portrait"/>
+        <activity android:name=".pedidoCompra.ListaPedidoCompraActivity"
+            android:label="Lista de Pedidos"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
