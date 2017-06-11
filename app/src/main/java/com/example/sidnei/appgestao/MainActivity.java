@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivityForResult(it2,20);
 
                 }else {
-                    //String mensa = jsonObject.getString("wsMsg");
+
                     Toast.makeText(MainActivity.this, "Usuário não localizado",Toast.LENGTH_LONG).show();
                     edtUsuario.requestFocus();
                 }

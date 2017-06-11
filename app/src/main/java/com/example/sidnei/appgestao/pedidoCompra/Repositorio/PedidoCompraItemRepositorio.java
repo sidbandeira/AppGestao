@@ -66,12 +66,12 @@ public class PedidoCompraItemRepositorio {
     }
 
     //EXCLUIR ITENS DE UM PEDIDO DE COMPRA
-    public int excluir(PedidoCompraItem compraItem) {
+    public int excluir(Integer codCompra) {
         SQLiteDatabase db = helper.getWritableDatabase();
         int linhasAfetadas = db.delete(
-                PedidoCompraSQLHelper.TABELA,
-                PedidoCompraSQLHelper.COLUNA_IDPEDIDOITEM +" = ?",
-                new String[]{ String.valueOf(compraItem._id)});
+                PedidoCompraSQLHelper.TABELAITEM,
+                PedidoCompraSQLHelper.COLUNA_IDCOMPRA +" = ?",
+                new String[]{ String.valueOf(codCompra)});
         db.close();
         return linhasAfetadas;
     }

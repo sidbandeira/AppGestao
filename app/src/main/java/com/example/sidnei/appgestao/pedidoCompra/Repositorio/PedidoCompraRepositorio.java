@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sidnei.appgestao.Classes.PedidoCompra;
 import com.example.sidnei.appgestao.pedidoCompra.Persistencia.PedidoCompraSQLHelper;
+import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocioListFragment;
 
 public class PedidoCompraRepositorio {
     private PedidoCompraSQLHelper helper;
@@ -72,12 +73,12 @@ public class PedidoCompraRepositorio {
     }
 
     //EXCLUIR UM PEDIDO DE COMPRA
-    public int excluir(PedidoCompra compra) {
+    public int excluir(Integer cod) {
         SQLiteDatabase db = helper.getWritableDatabase();
         int linhasAfetadas = db.delete(
                 PedidoCompraSQLHelper.TABELA,
                 PedidoCompraSQLHelper.COLUNA_IDPEDIDO    +" = ?",
-                new String[]{ String.valueOf(compra._id)});
+                new String[]{ String.valueOf(cod)});
         db.close();
         return linhasAfetadas;
     }
@@ -85,10 +86,9 @@ public class PedidoCompraRepositorio {
     public Cursor carregaDados(){
         Cursor cursor;
         SQLiteDatabase db = helper.getReadableDatabase();
-
         String[] campos =  {"_id, idfornecedor, descricaofornecedor, totalpedido, formapgto, dtpedido, dtentrega"};
-        cursor = db.query("pedidocompra", campos, null, null, null, null, null, null);
-
+        String condicao = "codunnegocio = " + String.valueOf(UnidadeNegocioListFragment.codUnidade.toString());
+        cursor = db.query("pedidocompra", campos, condicao, null , null, null, null, null);
         if(cursor!=null){
             cursor.moveToFirst();
         }

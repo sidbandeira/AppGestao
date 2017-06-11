@@ -3,6 +3,8 @@ package com.example.sidnei.appgestao.pedidoCompra;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.sidnei.appgestao.Classes.PedidoCompra;
@@ -22,6 +24,17 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_pedido_compra);
         listaPedidoCompra = (ListView)findViewById(R.id.listaPedidoCompra);
 
+        listaPedidoCompra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                PedidoCompraItemRepositorio repItem = new PedidoCompraItemRepositorio(ListaPedidoCompraActivity.this);
+//                repItem.excluir(3);
+//
+//                PedidoCompraRepositorio rep = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
+//                rep.excluir(3);
+            }
+        });
+
         PedidoCompraRepositorio rep = new PedidoCompraRepositorio(this);
         Cursor cursor = rep.carregaDados();
         List<PedidoCompra> pedido = new ArrayList<PedidoCompra>();
@@ -40,5 +53,6 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         }
         cursor.close();
         listaPedidoCompra.setAdapter(new AdapterListaPedido(this, (ArrayList<PedidoCompra>) pedido));
+
     }
 }
