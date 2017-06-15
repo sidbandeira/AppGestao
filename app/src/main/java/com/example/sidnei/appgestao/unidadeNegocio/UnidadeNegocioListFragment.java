@@ -25,6 +25,7 @@ import java.util.List;
 public class UnidadeNegocioListFragment extends Fragment implements AdapterView.OnItemClickListener{
     // VARIAVEL PUBLICA PARA PASSAR O CODIGO DA UNIDADE DE NEGOCIO SELECIONADA.
     public static Integer codUnidade = 0;
+    public static String nomeUnidade = "";
     UnidadeNegocioTask mTask;
     List<UnidadeNegocio> mUnidadeNegocio;
     ListView mListView;
@@ -83,6 +84,8 @@ public class UnidadeNegocioListFragment extends Fragment implements AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         UnidadeNegocio unneg = (UnidadeNegocio) adapterView.getItemAtPosition(i);
         codUnidade = unneg.codunidade;
+        nomeUnidade = unneg.razaosocial;
+        
         Intent it = new Intent(getActivity(),MenuActivity.class );
         startActivity(it);
     }
