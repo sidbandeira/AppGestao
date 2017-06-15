@@ -96,4 +96,45 @@ public class PedidoCompraRepositorio {
         return cursor;
     }
 
+    public Cursor CarregaPedido(Integer codPedido){
+
+//        SELECT pedidocompraitem._id AS iditem, descricaoitem, qtdeitem,precocusto, totalitem,
+//                idCompra, descricaofornecedor, email, formapgto, dtpedido,dtentrega, totalpedido
+//        FROM pedidocompraitem
+//        INNER JOIN PedidoCompra ON PedidoCompraItem.idCompra = PedidoCompra._id
+//        WHERE pedidocompraitem.idcompra =3
+//        AND pedidocompra.codunnegocio = 3
+
+        Cursor cursor;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String query = "SELECT pedidocompraitem._id AS iditem, descricaoitem, qtdeitem,precocusto, totalitem," +
+                " idCompra, descricaofornecedor, email, formapgto, dtpedido,dtentrega, totalpedido" +
+                " FROM pedidocompraitem " +
+                " INNER JOIN pedidoCompra ON PedidoCompraItem.idCompra = PedidoCompra._id" +
+                " WHERE pedidocompraitem.idcompra = " + codPedido +
+                " AND pedidocompra.codunnegocio = " + String.valueOf(UnidadeNegocioListFragment.codUnidade.toString());
+        cursor = db.rawQuery(query,null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        db.close();
+
+
+
+
+//        String[] campos =  { "compra.descricaofornecedor, compra.email, compra.dtPedido, compra.dtEntrega, compra.totalPedido," +
+//                             " compraItem.descricaoItem, compraItem.precoCusto, compraItem.qtdeItem, compraItem.totalItem"};
+//        String condicao = "codunnegocio = " + String.valueOf(UnidadeNegocioListFragment.codUnidade.toString()) +
+//                          " AND compra._id = " + codPedido.toString();
+//        cursor = db.query("pedidocompra, pedidocompraitem", campos, condicao, null , null, null, null, null);
+//        if(cursor!=null){
+//            cursor.moveToFirst();
+//        }
+//        db.close();
+
+
+
+        return  cursor;
+    }
+
 }
