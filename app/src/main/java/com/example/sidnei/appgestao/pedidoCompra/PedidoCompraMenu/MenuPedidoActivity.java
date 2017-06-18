@@ -17,14 +17,17 @@ public class MenuPedidoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_pedido);
     }
 
+    // cHAMA A TELA DE LANÇAMENTO DE PEDIDOS.
     public void btnNovo(View view) {
         Intent it = new Intent(this, PedidoCompraActivity.class);
         startActivity(it);
     }
 
+    // LISTA OS PEDIDOS GERADOS
     public void btnListar(View view) {
-        Intent it = new Intent(this, ListaPedidoCompraActivity.class);
-        startActivity(it);
+        Intent it2 = new Intent(this, ListaPedidoCompraActivity.class);
+        it2.putExtra("tela", "listagem");
+        startActivityForResult(it2, 2);
     }
 
 }

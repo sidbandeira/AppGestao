@@ -1,8 +1,10 @@
 package com.example.sidnei.appgestao.pedidoCompra;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +13,7 @@ import android.widget.ListView;
 import com.example.sidnei.appgestao.Classes.PedidoCompra;
 import com.example.sidnei.appgestao.R;
 import com.example.sidnei.appgestao.pedidoCompra.Adaptadores.AdapterListaPedido;
+import com.example.sidnei.appgestao.pedidoCompra.Repositorio.PedidoCompraItemRepositorio;
 import com.example.sidnei.appgestao.pedidoCompra.Repositorio.PedidoCompraRepositorio;
 import com.example.sidnei.appgestao.unidadeNegocio.UnidadeNegocioListFragment;
 
@@ -26,6 +29,7 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
     private String codPedido;
     private String nomeFornecedor;
     private String emailFornecedor;
+    private Integer posicao = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,57 +39,85 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
 
         listaPedidoCompra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                posicao = position;
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ListaPedidoCompraActivity.this);
+                // SETA UM TITULO PARA O DIALOG
+                alertDialogBuilder.setTitle("Escolha a opção desejada");
+                // SETA UMA MENSAGEM PARA O DIALOG
+                alertDialogBuilder
+                        .setMessage("O que deseja fazer?")
+                        .setCancelable(false)
+                        .setPositiveButton("Enviar Pedido",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                PedidoCompraRepositorio rep = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
+                                Cursor cursor =  rep.CarregaPedido((int) pedido.get(posicao)._id);
+
+                                if (cursor.getCount()> 0){
+                                    if (cursor.moveToFirst()) {
+                                        StringBuffer texto = new StringBuffer();
+                                        // VARIAVEIS PARA GRAVAR O NOME DO ARQUIVO COM O PEDIDO
+                                        codPedido = cursor.getString(cursor.getColumnIndexOrThrow("idcompra"));
+                                        nomeFornecedor =cursor.getString(cursor.getColumnIndexOrThrow("descricaofornecedor"));
+                                        emailFornecedor = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+
+                                        // MONTA O CABEÇALHO DO PEDIDO
+                                        texto.append("                     PEDIDO DE COMPRA                  " + "\n");
+                                        texto.append("------------------------------------------------------------" + "\n");
+                                        texto.append("EMPRESA: " + String.valueOf(UnidadeNegocioListFragment.nomeUnidade.toString()) + "\n\n");
 
 
-//                PedidoCompraItemRepositorio repItem = new PedidoCompraItemRepositorio(ListaPedidoCompraActivity.this);
-//                repItem.excluir(3);
+                                        texto.append("FORNECEDOR: " + cursor.getString(cursor.getColumnIndexOrThrow("descricaofornecedor")) + "\n");
+                                        texto.append("DATA PEDIDO: " + cursor.getString(cursor.getColumnIndexOrThrow("dtpedido")) +
+                                                "    ENTREGA: " + cursor.getString(cursor.getColumnIndexOrThrow("dtentrega"))  + "\n");
+                                        texto.append("FORMA PAGTO: " + cursor.getString(cursor.getColumnIndexOrThrow("formapgto")) + "\n");
+                                        texto.append("VALOR PEDIDO R$: " + cursor.getString(cursor.getColumnIndexOrThrow("totalpedido")) + "\n\n\n");
 
-                PedidoCompraRepositorio rep = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
-                Cursor cursor =  rep.CarregaPedido((int) pedido.get(position)._id);
+                                        // MONTA OS ITENS DO PEDIDO
+                                        texto.append("                      ITENS DO PEDIDO                   " + "\n");
+                                        texto.append("------------------------------------------------------------" + "\n");
+                                        while (!cursor.isAfterLast()) {
+                                            texto.append(cursor.getString(cursor.getColumnIndexOrThrow("descricaoitem")) + "\n");
+                                            texto.append("    QTDE: " + cursor.getString(cursor.getColumnIndexOrThrow("qtdeitem")) +
+                                                    " VALOR UNIT. R$: " + cursor.getString(cursor.getColumnIndexOrThrow("precocusto")) +
+                                                    " TOTAL R$: " + cursor.getString(cursor.getColumnIndexOrThrow("precocusto"))+ "\n\n");
 
-                if (cursor.getCount()> 0){
-                    if (cursor.moveToFirst()) {
-                        StringBuffer texto = new StringBuffer();
-                        // VARIAVEIS PARA GRAVAR O NOME DO ARQUIVO COM O PEDIDO
-                        codPedido = cursor.getString(cursor.getColumnIndexOrThrow("idcompra"));
-                        nomeFornecedor =cursor.getString(cursor.getColumnIndexOrThrow("descricaofornecedor"));
-                        emailFornecedor = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+                                            cursor.moveToNext();
+                                        }
+                                        texto.append("------------------------------------------------------------" + "\n");
 
-                        // MONTA O CABEÇALHO DO PEDIDO
-                        texto.append("                     PEDIDO DE COMPRA                  " + "\n");
-                        texto.append("------------------------------------------------------------" + "\n");
-                        texto.append("EMPRESA: " + String.valueOf(UnidadeNegocioListFragment.nomeUnidade.toString()) + "\n\n");
+                                        try {
+                                            salvarExterno(texto.toString() ,codPedido + "_" + nomeFornecedor  + ".txt");
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .setNegativeButton("Excluir Pedido",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                listaPedidoCompra.setAdapter(null);
+                                PedidoCompraItemRepositorio repItem = new PedidoCompraItemRepositorio(ListaPedidoCompraActivity.this);
+                                repItem.excluir((int) pedido.get( posicao)._id);
+                                PedidoCompraRepositorio repPedido = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
+                                repPedido.excluir((int) pedido.get(posicao)._id);
+                                finish();
+                            }
+                        });
 
+                // CRIA O DIALOG
+                AlertDialog alertDialog = alertDialogBuilder.create();
 
-                        texto.append("FORNECEDOR: " + cursor.getString(cursor.getColumnIndexOrThrow("descricaofornecedor")) + "\n");
-                        texto.append("DATA PEDIDO: " + cursor.getString(cursor.getColumnIndexOrThrow("dtpedido")) +
-                                     "    ENTREGA: " + cursor.getString(cursor.getColumnIndexOrThrow("dtentrega"))  + "\n");
-                        texto.append("FORMA PAGTO: " + cursor.getString(cursor.getColumnIndexOrThrow("formapgto")) + "\n");
-                        texto.append("VALOR PEDIDO R$: " + cursor.getString(cursor.getColumnIndexOrThrow("totalpedido")) + "\n\n\n");
+                // EXIBE O DIALOG
+                alertDialog.show();
 
-                        // MONTA OS ITENS DO PEDIDO
-                        texto.append("                      ITENS DO PEDIDO                   " + "\n");
-                        texto.append("------------------------------------------------------------" + "\n");
-                        while (!cursor.isAfterLast()) {
-                            texto.append(cursor.getString(cursor.getColumnIndexOrThrow("descricaoitem")) + "\n");
-                            texto.append("    QTDE: " + cursor.getString(cursor.getColumnIndexOrThrow("qtdeitem")) +
-                                         " VALOR UNIT. R$: " + cursor.getString(cursor.getColumnIndexOrThrow("precocusto")) +
-                                         " TOTAL R$: " + cursor.getString(cursor.getColumnIndexOrThrow("precocusto"))+ "\n\n");
-
-                            cursor.moveToNext();
-                        }
-                        texto.append("------------------------------------------------------------" + "\n");
-
-                        try {
-                            salvarExterno(texto.toString() ,codPedido + "_" + nomeFornecedor  + ".txt");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
             }
         });
+        carregarPedidos();
+    }
+
+    private void carregarPedidos(){
 
         PedidoCompraRepositorio rep = new PedidoCompraRepositorio(this);
         Cursor cursor = rep.carregaDados();
@@ -104,7 +136,6 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         }
         cursor.close();
         listaPedidoCompra.setAdapter(new AdapterListaPedido(this, (ArrayList<PedidoCompra>) pedido));
-
     }
 
     // ####### MANUPULACAO DO ARQUIVO TEXTO #########
@@ -130,7 +161,5 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         }finally {
             pw.close();
         }
-
-
     }
 }
