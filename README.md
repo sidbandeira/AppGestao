@@ -1,6 +1,6 @@
-# AppGestao
+# S-Gestão (Aplicativo Móvel de Gestão)
 
-S-Gestão (Aplicativo Móvel de Gestão) é um aplicativo que visa auxiliar o gestor na tomada de decisão, controle de estoque de mercadorias e acompanhamento da movimentação financeira de uma empresa.
+É um aplicativo que visa auxiliar o gestor na tomada de decisão, controle de estoque de mercadorias e acompanhamento da movimentação financeira de uma empresa.
 
 
 Aplicativo desenvolvido para rodar em Sistema operacional Android a partir da versão 4.4 (KitKat).
