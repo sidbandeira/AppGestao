@@ -11,11 +11,9 @@ Para acesso ao aplicativo estão disponível os seguintes usuários e senhas:
 
 Usuário: sidnei@gmail.com
 
-
 Senha: 123456
 
 Usuário: sidnei2@gmail.com
-
 
 Senha: 123456
 
