@@ -79,10 +79,11 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
                                         texto.append("                      ITENS DO PEDIDO                   " + "\n");
                                         texto.append("------------------------------------------------------------" + "\n");
                                         while (!cursor.isAfterLast()) {
+
                                             texto.append(cursor.getString(cursor.getColumnIndexOrThrow("descricaoitem")) + "\n");
                                             texto.append("    QTDE: " + cursor.getString(cursor.getColumnIndexOrThrow("qtdeitem")) +
                                                     " VALOR UNIT. R$: " + cursor.getString(cursor.getColumnIndexOrThrow("precocusto")) +
-                                                    " TOTAL R$: " + cursor.getString(cursor.getColumnIndexOrThrow("precocusto"))+ "\n\n");
+                                                    " TOTAL R$: " + cursor.getString(cursor.getColumnIndexOrThrow("totalitem"))+ "\n\n");
 
                                             cursor.moveToNext();
                                         }
@@ -125,7 +126,7 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         carregarPedidos();
     }
 
-    // FUNÇÃO RESPONSÁVEL PELO ENVIO DE EMAIL
+    // FUNCAO RESPONSAVEL PELO ENVIO DE EMAIL
     public void EnviarEmail(String Email, String Anexo) {
         Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
         intent.setType("text/plain");
@@ -144,7 +145,7 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
     }
 
 
-    //FUNÇÃO RESPONSÁVEL POR CARREGAR OS PEDIDO PARA A LISTA
+    //FUNCAO RESPONSAVEL POR CARREGAR OS PEDIDO PARA A LISTA
     private void carregarPedidos(){
         PedidoCompraRepositorio rep = new PedidoCompraRepositorio(this);
         Cursor cursor = rep.carregaDados();
