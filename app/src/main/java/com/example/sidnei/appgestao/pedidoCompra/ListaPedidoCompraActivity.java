@@ -1,7 +1,9 @@
 package com.example.sidnei.appgestao.pedidoCompra;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -41,14 +43,14 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 posicao = position;
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ListaPedidoCompraActivity.this);
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ListaPedidoCompraActivity.this);
                 // SETA UM TITULO PARA O DIALOG
                 alertDialogBuilder.setTitle("Escolha a opção desejada");
                 // SETA UMA MENSAGEM PARA O DIALOG
                 alertDialogBuilder
                         .setMessage("O que deseja fazer?")
-                        .setCancelable(false)
-                        .setPositiveButton("Enviar Pedido",new DialogInterface.OnClickListener() {
+                        //.setCancelable(false)
+                        .setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 PedidoCompraRepositorio rep = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
                                 Cursor cursor =  rep.CarregaPedido((int) pedido.get(posicao)._id);
@@ -87,7 +89,8 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
                                         texto.append("------------------------------------------------------------" + "\n");
 
                                         try {
-                                            salvarExterno(texto.toString() ,codPedido + "_" + nomeFornecedor  + ".txt");
+                                            salvarExterno(texto.toString() ,nomeFornecedor + ".txt");
+                                            EnviarEmail("sidneibandeira02@gmail.com" , nomeFornecedor + ".txt");
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -95,14 +98,19 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
                                 }
                             }
                         })
-                        .setNegativeButton("Excluir Pedido",new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Excluir",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                listaPedidoCompra.setAdapter(null);
-                                PedidoCompraItemRepositorio repItem = new PedidoCompraItemRepositorio(ListaPedidoCompraActivity.this);
-                                repItem.excluir((int) pedido.get( posicao)._id);
-                                PedidoCompraRepositorio repPedido = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
-                                repPedido.excluir((int) pedido.get(posicao)._id);
-                                finish();
+                            listaPedidoCompra.setAdapter(null);
+                            PedidoCompraItemRepositorio repItem = new PedidoCompraItemRepositorio(ListaPedidoCompraActivity.this);
+                            repItem.excluir((int) pedido.get( posicao)._id);
+                            PedidoCompraRepositorio repPedido = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
+                            repPedido.excluir((int) pedido.get(posicao)._id);
+                            dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton("Voltar",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.dismiss();
                             }
                         });
 
@@ -117,8 +125,27 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         carregarPedidos();
     }
 
-    private void carregarPedidos(){
+    // FUNÇÃO RESPONSÁVEL PELO ENVIO DE EMAIL
+    public void EnviarEmail(String Email, String Anexo) {
+        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        intent.setType("text/plain");
+        intent.putExtra(intent.EXTRA_EMAIL, new String[]{Email});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Pedido de Compras");
+        intent.putExtra(Intent.EXTRA_TEXT, "Em anexo pedido de compras.");
 
+        File baseDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        baseDir.mkdirs();
+        File f1 = new File(baseDir, Anexo);
+        ArrayList<Uri> uris = new ArrayList<Uri>();
+        uris.add(Uri.fromFile(f1));
+
+        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+        startActivity(intent);
+    }
+
+
+    //FUNÇÃO RESPONSÁVEL POR CARREGAR OS PEDIDO PARA A LISTA
+    private void carregarPedidos(){
         PedidoCompraRepositorio rep = new PedidoCompraRepositorio(this);
         Cursor cursor = rep.carregaDados();
         if (cursor.getCount()> 0){
@@ -139,7 +166,6 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
     }
 
     // ####### MANUPULACAO DO ARQUIVO TEXTO #########
-
     //Função: salvarExterno(Text) - Irá salvar o texto na memória Externa
     public String salvarExterno(String dados, String nomeArquivo) throws IOException {
         //Tratativa para memória externa
@@ -151,7 +177,8 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
         }
         //Em caso de montado, irá pegar o diretorio padrão
         File dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-        File file = new File(dir, nomeArquivo); //Criar arquivo ou reutilizar
+        File  dir2 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        File file = new File(dir2, nomeArquivo); //Criar arquivo ou reutilizar
         file.getParentFile().mkdirs();
         PrintWriter pw = new PrintWriter(file);	//Funcao para escrita
 
@@ -162,4 +189,6 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
             pw.close();
         }
     }
+
+
 }
