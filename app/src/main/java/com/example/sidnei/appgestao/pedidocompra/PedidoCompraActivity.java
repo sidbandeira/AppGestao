@@ -184,11 +184,12 @@ public class PedidoCompraActivity extends AppCompatActivity {
                         @Override
                         public void run() {spnFornecedor.requestFocusFromTouch();}
                     });
-                    String spfornecedor = fornecedorlist.get(position).toString();;
+                    String spfornecedor = fornecedorlist.get(position).toString();
                     String[] partes = spfornecedor.split("-");
                     if (position != 0){
                         codFornecedor = Integer.parseInt(partes[0]);
                         descricaofornecedor = partes[1];
+                        edtEmail.setText(descricaofornecedor.replace(" ","") + "@gmail.com");
                     }
                 }
 
