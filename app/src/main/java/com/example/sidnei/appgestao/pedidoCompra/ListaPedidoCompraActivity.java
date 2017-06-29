@@ -91,7 +91,7 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
 
                                         try {
                                             salvarExterno(texto.toString() ,nomeFornecedor + ".txt");
-                                            EnviarEmail("sidneibandeira02@gmail.com" , nomeFornecedor + ".txt");
+                                            EnviarEmail(emailFornecedor , nomeFornecedor + ".txt");
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -106,7 +106,7 @@ public class ListaPedidoCompraActivity extends AppCompatActivity {
                             repItem.excluir((int) pedido.get( posicao)._id);
                             PedidoCompraRepositorio repPedido = new PedidoCompraRepositorio(ListaPedidoCompraActivity.this);
                             repPedido.excluir((int) pedido.get(posicao)._id);
-                            dialog.dismiss();
+                            finish();
                             }
                         })
                         .setNeutralButton("Voltar",new DialogInterface.OnClickListener() {
