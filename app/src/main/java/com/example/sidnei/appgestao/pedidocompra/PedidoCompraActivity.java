@@ -33,9 +33,7 @@ public class PedidoCompraActivity extends AppCompatActivity {
     public static String datapedido = "";
     public static String dataentrega = "";
     public static String formapgto = "";
-
     private String dataFormatada;
-
     JSONObject jsonobject;
     JSONArray jsonarray;
     private Button btnProdutos;
@@ -189,7 +187,7 @@ public class PedidoCompraActivity extends AppCompatActivity {
                     if (position != 0){
                         codFornecedor = Integer.parseInt(partes[0]);
                         descricaofornecedor = partes[1];
-                        edtEmail.setText(descricaofornecedor.replace(" ","") + "@gmail.com");
+                        edtEmail.setText(descricaofornecedor.replace(" ","").toLowerCase() + "@gmail.com");
                     }
                 }
 
